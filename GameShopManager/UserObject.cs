@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameShopManager
 {
-    internal class User
+    internal class UserObject
     {
         /// <summary>
         /// Reference ID for database
@@ -24,14 +24,14 @@ namespace GameShopManager
         /// Amount of cash the user has, can be used to purchase items
         /// </summary>
         public int Cash { get; set; }
-        public Item[] Inventory { get; set; }
+        public ItemObject[] Inventory { get; set; }
 
         /// <summary>
         /// Creates a new user with a username and password, and sets cash to 0
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        public User(string userName, string password)
+        public UserObject(string userName, string password)
         {
             UserName = userName;
             Password = password;
@@ -44,7 +44,7 @@ namespace GameShopManager
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <param name="cash"></param>
-        public User(string userName, string password, int cash)
+        public UserObject(string userName, string password, int cash)
         {
             UserName = userName;
             Password = password;
