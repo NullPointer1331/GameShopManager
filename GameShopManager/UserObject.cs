@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,11 +34,8 @@ namespace GameShopManager
 
         /// <summary>
         /// List of items the user owns
-        /// Stores the ItemID as the key 
-        /// and the quantity of that item as the value
         /// </summary>
-        [NotMapped]
-        public Dictionary<int, int>? Inventory { get; set; }
+        public InventoryItem[]? Inventory { get; set; }
 
         /// <summary>
         /// Creates a new user with a username and password, and sets cash to 0
@@ -62,6 +60,25 @@ namespace GameShopManager
             UserName = userName;
             Password = password;
             Cash = cash;
+        }
+
+        [PrimaryKey(nameof(UserID), nameof(ItemID))]
+        internal class InventoryItem
+        {
+            /// <summary>
+            /// The Id of the user who owns the item
+            /// </summary>
+            [ForeignKey("UserID")]
+            public int UserID { get; set; }
+            /// <summary>
+            /// The Id of the item
+            /// </summary>
+            [ForeignKey("ItemID")]
+            public int ItemID { get; set; }
+            /// <summary>
+            /// The quantity of the item
+            /// </summary>
+            public int Quantity { get; set; }
         }
     }
 }

@@ -14,9 +14,10 @@ namespace GameShopManager
             // Database = the name of the database
             // Server = the server we're connecting to. LocalDB is included with VS
             // Trusted_Connection = true means our windows account should be used
-            options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=GameShopManager;Trusted_Connection=True;");
+            options.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=GameShopManager;Trusted_Connection=True;");
         }
         public DbSet<UserObject> Users { get; set; }
         public DbSet<ItemObject> Items { get; set; }
+        public DbSet<UserObject.InventoryItem> InventoryItems { get; set; }
     }
 }
