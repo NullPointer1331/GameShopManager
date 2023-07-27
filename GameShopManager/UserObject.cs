@@ -33,7 +33,7 @@ namespace GameShopManager
         /// Stores the ItemID as the key 
         /// and the quantity of that item as the value
         /// </summary>
-        public Dictionary<int, int> Inventory { get; set; }
+        public Dictionary<int, int>? Inventory { get; set; }
 
         /// <summary>
         /// Creates a new user with a username and password, and sets cash to 0
