@@ -11,20 +11,29 @@ namespace GameShopManager
         /// <summary>
         /// Reference ID for database
         /// </summary>
-        public int UserId { get; set; }
+        public int UserID { get; set; }
+
         /// <summary>
         /// Display name for the user account
         /// </summary>
         public required string UserName { get; set; }
+
         /// <summary>
         /// Password for the user account
         /// </summary>
         public required string Password { get; set; }
+
         /// <summary>
         /// Amount of cash the user has, can be used to purchase items
         /// </summary>
         public int Cash { get; set; }
-        public ItemObject[] Inventory { get; set; }
+
+        /// <summary>
+        /// List of items the user owns
+        /// Stores the ItemID as the key 
+        /// and the quantity of that item as the value
+        /// </summary>
+        public Dictionary<int, int> Inventory { get; set; }
 
         /// <summary>
         /// Creates a new user with a username and password, and sets cash to 0

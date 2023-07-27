@@ -28,10 +28,6 @@ namespace GameShopManager
         /// </summary>
         public int ItemPrice { get; set; }
 
-        /// <summary>
-        /// Amount of item stored
-        /// </summary>
-        public int Quantity { get; set; }
 
         public ItemObject(string itemName, string itemDescription, int itemPrice) 
         { 
@@ -39,7 +35,6 @@ namespace GameShopManager
             ItemName = itemName;
             ItemDescription = itemDescription;
             ItemPrice = itemPrice;
-            Quantity = 0;
         }
     }
 }
