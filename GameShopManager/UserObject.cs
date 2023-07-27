@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace GameShopManager
         /// Stores the ItemID as the key 
         /// and the quantity of that item as the value
         /// </summary>
+        [NotMapped]
         public Dictionary<int, int>? Inventory { get; set; }
 
         /// <summary>
