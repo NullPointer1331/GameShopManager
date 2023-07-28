@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameShopManager.Migrations
 {
     [DbContext(typeof(GameShopContext))]
-    [Migration("20230727192629_InventoryCreate")]
-    partial class InventoryCreate
+    [Migration("20230728004550_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
