@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameShopManager
 {
+    [DebuggerDisplay("Name: {UserName} Password: {Password} Cash: {Cash}")]
     internal class UserObject
     {
         /// <summary>
@@ -70,11 +72,13 @@ namespace GameShopManager
             /// </summary>
             [ForeignKey("UserID")]
             public int UserID { get; set; }
+
             /// <summary>
             /// The Id of the item
             /// </summary>
-            [ForeignKey("ItemID")]
+            [ForeignKey("ItemID")] //I manually added the foreign key to the database since this wasn't working
             public int ItemID { get; set; }
+
             /// <summary>
             /// The quantity of the item
             /// </summary>
