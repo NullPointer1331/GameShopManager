@@ -20,5 +20,30 @@ namespace GameShopManager
             ItemObject item = dbContext.Items.Where(i => i.ItemID == id).FirstOrDefault();
             return item;
         }
+        public static void AddItem(ItemObject item)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            dbContext.Items.Add(item);
+            dbContext.SaveChanges();
+        }
+        public static void UpdateItem(ItemObject item)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            dbContext.Items.Update(item);
+            dbContext.SaveChanges();
+        }
+        public static void DeleteItem(ItemObject item)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            dbContext.Items.Remove(item);
+            dbContext.SaveChanges();
+        }
+        public static void DeleteItem(int id)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            ItemObject item = dbContext.Items.Where(i => i.ItemID == id).FirstOrDefault();
+            dbContext.Items.Remove(item);
+            dbContext.SaveChanges();
+        }
     }
 }
