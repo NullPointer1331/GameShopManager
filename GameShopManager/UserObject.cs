@@ -37,7 +37,7 @@ namespace GameShopManager
         /// <summary>
         /// List of items the user owns
         /// </summary>
-        public InventoryItem[]? Inventory { get; set; }
+        public List<InventoryItem>? Inventory { get; set; }
 
         /// <summary>
         /// Creates a new user with a username and password, and sets cash to 0
