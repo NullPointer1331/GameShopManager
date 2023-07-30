@@ -1,16 +1,22 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameShopManager
 {
+    [DebuggerDisplay("Name: {UserName} Password: {Password} Cash: {Cash}")]
     internal class UserObject
     {
         /// <summary>
         /// Reference ID for database
         /// </summary>
+        [Key]
         public int UserID { get; set; }
 
         /// <summary>
@@ -30,10 +36,8 @@ namespace GameShopManager
 
         /// <summary>
         /// List of items the user owns
-        /// Stores the ItemID as the key 
-        /// and the quantity of that item as the value
         /// </summary>
-        public Dictionary<int, int> Inventory { get; set; }
+        public List<InventoryItem>? Inventory { get; set; }
 
         /// <summary>
         /// Creates a new user with a username and password, and sets cash to 0
@@ -58,6 +62,27 @@ namespace GameShopManager
             UserName = userName;
             Password = password;
             Cash = cash;
+        }
+
+        [PrimaryKey(nameof(UserID), nameof(ItemID))]
+        internal class InventoryItem
+        {
+            /// <summary>
+            /// The Id of the user who owns the item
+            /// </summary>
+            [ForeignKey("UserID")]
+            public int UserID { get; set; }
+
+            /// <summary>
+            /// The Id of the item
+            /// </summary>
+            [ForeignKey("ItemID")] //I manually added the foreign key to the database since this wasn't working
+            public int ItemID { get; set; }
+
+            /// <summary>
+            /// The quantity of the item
+            /// </summary>
+            public int Quantity { get; set; }
         }
     }
 }
