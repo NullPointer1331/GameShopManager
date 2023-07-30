@@ -12,7 +12,7 @@ the user.
 * Custom items to sell
 
 ## Requirements to run locally
-* ASP.NET
+* Entity Framework Core
 
 ## Documentation
 * [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
