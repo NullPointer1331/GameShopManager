@@ -3,7 +3,7 @@
 
 
 ## Game Shop Manager Description
-![Alt text][https://www.pngkey.com/png/detail/233-2332677_ega-png.png =100x20]
+![Alt text](https://www.pngkey.com/png/detail/233-2332677_ega-png.png =100x20)
 Game Shop Manager is a store management game where you can create and sell custom items created by
 the user.
 
