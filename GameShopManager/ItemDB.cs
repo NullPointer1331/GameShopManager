@@ -57,24 +57,26 @@ namespace GameShopManager
         }
 
         /// <summary>
-        /// Deletes an ItemObject from the database.
+        /// Deletes an ItemObject from the database. If any InventoryItems reference the ItemObject, they will also be deleted.
         /// </summary>
         /// <param name="item">The ItemObject to delete.</param>
         public static void DeleteItem(ItemObject item)
         {
             using GameShopContext dbContext = new GameShopContext();
+            InventoryItemDB.DeleteAllOfItem(item.ItemID);
             dbContext.Items.Remove(item);
             dbContext.SaveChanges();
         }
 
         /// <summary>
-        /// Deletes an ItemObject from the database by ID.
+        /// Deletes an ItemObject from the database by ID. If any InventoryItems reference the ItemObject, they will also be deleted.
         /// </summary>
         /// <param name="id">The ID of the ItemObject to delete.</param>
         public static void DeleteItem(int id)
         {
             using GameShopContext dbContext = new GameShopContext();
             ItemObject item = dbContext.Items.Where(i => i.ItemID == id).FirstOrDefault();
+            InventoryItemDB.DeleteAllOfItem(item.ItemID);
             dbContext.Items.Remove(item);
             dbContext.SaveChanges();
         }
