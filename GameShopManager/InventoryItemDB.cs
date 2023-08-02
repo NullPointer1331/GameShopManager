@@ -28,7 +28,7 @@ namespace GameShopManager
         /// </summary>
         /// <param name="userID">The ID of the user that the item belongs to.</param>
         /// <param name="itemID">The ID of the item to retrieve.</param>
-        /// <returns>An InventoryItem object representing the requested inventory item.</returns>
+        /// <returns>An InventoryItem object representing the requested inventory item, or null if not found.</returns>
         public static UserObject.InventoryItem GetInventoryItem(int userID, int itemID)
         {
             using GameShopContext dbContext = new GameShopContext();
@@ -63,12 +63,23 @@ namespace GameShopManager
         /// Deletes a list of inventory items from the database.
         /// </summary>
         /// <param name="inventory">A list of InventoryItem objects to delete from the database.</param>
-        public static void DeleteUserInventory(List<UserObject.InventoryItem> inventory)
+        public static void DeleteInventoryItems(List<UserObject.InventoryItem> inventory)
         {
             foreach (UserObject.InventoryItem item in inventory)
             {
                 DeleteInventoryItem(item);
             }
+        }
+
+        /// <summary>
+        /// Deletes all inventory items of a specific item from the database.
+        /// </summary>
+        /// <param name="itemID"></param>
+        public static void DeleteAllOfItem(int itemID)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            List<UserObject.InventoryItem> inventory = dbContext.InventoryItems.Where(i => i.ItemID == itemID).ToList();
+            DeleteInventoryItems(inventory);
         }
 
         /// <summary>

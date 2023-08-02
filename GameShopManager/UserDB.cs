@@ -63,32 +63,32 @@ namespace GameShopManager
             using GameShopContext dbContext = new GameShopContext();
             dbContext.Users.Update(user);
             // It deletes then re-adds the inventory items because it's easier than trying to figure out which ones were added/removed
-            InventoryItemDB.DeleteUserInventory(user.Inventory);
+            InventoryItemDB.DeleteInventoryItems(user.Inventory);
             InventoryItemDB.AddInventory(user.Inventory);
             dbContext.SaveChanges();
         }
 
         /// <summary>
-        /// Deletes a specified user from the database.
+        /// Deletes a specified user from the database. If any InventoryItems reference the user, they will also be deleted.
         /// </summary>
         /// <param name="user">The user to delete from the database.</param>
         public static void DeleteUser(UserObject user)
         {
             using GameShopContext dbContext = new GameShopContext();
-            InventoryItemDB.DeleteUserInventory(user.Inventory);
+            InventoryItemDB.DeleteInventoryItems(user.Inventory);
             dbContext.Users.Remove(user);
             dbContext.SaveChanges();
         }
 
         /// <summary>
-        /// Deletes a specified user from the database by its ID.
+        /// Deletes a specified user from the database by its ID. If any InventoryItems reference the user, they will also be deleted.
         /// </summary>
         /// <param name="id">The ID of the user to delete from the database.</param>
         public static void DeleteUser(int id)
         {
             using GameShopContext dbContext = new GameShopContext();
             UserObject user = dbContext.Users.Where(u => u.UserID == id).FirstOrDefault();
-            InventoryItemDB.DeleteUserInventory(user.Inventory);
+            InventoryItemDB.DeleteInventoryItems(user.Inventory);
             dbContext.Users.Remove(user);
             dbContext.SaveChanges();
         }
