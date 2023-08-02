@@ -19,6 +19,10 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             List<UserObject> users = dbContext.Users.ToList();
+            foreach (UserObject user in users)
+            {
+                user.Inventory = GetUserInventory(user.UserID);
+            }
             return users;
         }
 
@@ -31,6 +35,10 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             UserObject user = dbContext.Users.Where(u => u.UserID == id).FirstOrDefault();
+            if (user != null)
+            {
+                user.Inventory = GetUserInventory(user.UserID);
+            }
             return user;
         }
 
@@ -42,6 +50,7 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             dbContext.Users.Add(user);
+            AddInventory(user.Inventory);
             dbContext.SaveChanges();
         }
 
@@ -53,6 +62,9 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             dbContext.Users.Update(user);
+            // It deletes then re-adds the inventory items because it's easier than trying to figure out which ones were added/removed
+            DeleteUserInventory(user.Inventory);
+            AddInventory(user.Inventory);
             dbContext.SaveChanges();
         }
 
@@ -63,6 +75,7 @@ namespace GameShopManager
         public static void DeleteUser(UserObject user)
         {
             using GameShopContext dbContext = new GameShopContext();
+            DeleteUserInventory(user.Inventory);
             dbContext.Users.Remove(user);
             dbContext.SaveChanges();
         }
@@ -75,7 +88,52 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             UserObject user = dbContext.Users.Where(u => u.UserID == id).FirstOrDefault();
+            DeleteUserInventory(user.Inventory);
             dbContext.Users.Remove(user);
+            dbContext.SaveChanges();
+        }
+
+        public static List<UserObject.InventoryItem> GetUserInventory(int userID)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            List<UserObject.InventoryItem> inventory = dbContext.InventoryItems.Where(i => i.UserID == userID).ToList();
+            return inventory;
+        }
+
+        public static UserObject.InventoryItem GetInventoryItem(int userID, int itemID)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            UserObject.InventoryItem inventoryItem = dbContext.InventoryItems.Where(i => i.UserID == userID && i.ItemID == itemID).FirstOrDefault();
+            return inventoryItem;
+        }
+
+        public static void AddInventory(List<UserObject.InventoryItem> inventory)
+        {
+            foreach (UserObject.InventoryItem item in inventory)
+            {
+                AddInventoryItem(item);
+            }
+        }
+
+        public static void AddInventoryItem(UserObject.InventoryItem item)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            dbContext.InventoryItems.Add(item);
+            dbContext.SaveChanges();
+        }
+
+        public static void DeleteUserInventory(List<UserObject.InventoryItem> inventory)
+        {
+            foreach (UserObject.InventoryItem item in inventory)
+            {
+                DeleteInventoryItem(item);
+            }
+        }
+
+        public static void DeleteInventoryItem(UserObject.InventoryItem item)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            dbContext.InventoryItems.Remove(item);
             dbContext.SaveChanges();
         }
     }
