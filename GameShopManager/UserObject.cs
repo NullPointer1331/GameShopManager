@@ -22,12 +22,14 @@ namespace GameShopManager
         /// <summary>
         /// Display name for the user account
         /// </summary>
-        public required string UserName { get; set; }
+        [Required]
+        public string UserName { get; set; }
 
         /// <summary>
         /// Password for the user account
         /// </summary>
-        public required string Password { get; set; }
+        [Required]
+        public string Password { get; set; }
 
         /// <summary>
         /// Amount of cash the user has, can be used to purchase items
