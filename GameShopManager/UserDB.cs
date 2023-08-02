@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InventoryItemDB;
 
 namespace GameShopManager
 {
@@ -22,7 +21,7 @@ namespace GameShopManager
             List<UserObject> users = dbContext.Users.ToList();
             foreach (UserObject user in users)
             {
-                user.Inventory = GetUserInventory(user.UserID);
+                user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
             }
             return users;
         }
@@ -38,7 +37,7 @@ namespace GameShopManager
             UserObject user = dbContext.Users.Where(u => u.UserID == id).FirstOrDefault();
             if (user != null)
             {
-                user.Inventory = GetUserInventory(user.UserID);
+                user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
             }
             return user;
         }
@@ -51,7 +50,7 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             dbContext.Users.Add(user);
-            AddInventory(user.Inventory);
+            InventoryItemDB.AddInventory(user.Inventory);
             dbContext.SaveChanges();
         }
 
@@ -64,8 +63,8 @@ namespace GameShopManager
             using GameShopContext dbContext = new GameShopContext();
             dbContext.Users.Update(user);
             // It deletes then re-adds the inventory items because it's easier than trying to figure out which ones were added/removed
-            DeleteUserInventory(user.Inventory);
-            AddInventory(user.Inventory);
+            InventoryItemDB.DeleteUserInventory(user.Inventory);
+            InventoryItemDB.AddInventory(user.Inventory);
             dbContext.SaveChanges();
         }
 
@@ -76,7 +75,7 @@ namespace GameShopManager
         public static void DeleteUser(UserObject user)
         {
             using GameShopContext dbContext = new GameShopContext();
-            DeleteUserInventory(user.Inventory);
+            InventoryItemDB.DeleteUserInventory(user.Inventory);
             dbContext.Users.Remove(user);
             dbContext.SaveChanges();
         }
@@ -89,7 +88,7 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             UserObject user = dbContext.Users.Where(u => u.UserID == id).FirstOrDefault();
-            DeleteUserInventory(user.Inventory);
+            InventoryItemDB.DeleteUserInventory(user.Inventory);
             dbContext.Users.Remove(user);
             dbContext.SaveChanges();
         }

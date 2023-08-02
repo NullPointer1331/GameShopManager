@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace GameShopManager
 {
+    /// <summary>
+    /// Represents the database for all inventory items in the game.
+    /// </summary>
     internal class InventoryItemDB
     {
+        /// <summary>
+        /// Retrieves all inventory items belonging to a specific user.
+        /// </summary>
+        /// <param name="userID">The ID of the user to retrieve inventory items for.</param>
+        /// <returns>A list of InventoryItem objects representing the user's inventory.</returns>
         public static List<UserObject.InventoryItem> GetUserInventory(int userID)
         {
             using GameShopContext dbContext = new GameShopContext();
@@ -15,6 +23,12 @@ namespace GameShopManager
             return inventory;
         }
 
+        /// <summary>
+        /// Retrieves a specific inventory item from the database.
+        /// </summary>
+        /// <param name="userID">The ID of the user that the item belongs to.</param>
+        /// <param name="itemID">The ID of the item to retrieve.</param>
+        /// <returns>An InventoryItem object representing the requested inventory item.</returns>
         public static UserObject.InventoryItem GetInventoryItem(int userID, int itemID)
         {
             using GameShopContext dbContext = new GameShopContext();
@@ -22,6 +36,10 @@ namespace GameShopManager
             return inventoryItem;
         }
 
+        /// <summary>
+        /// Adds a list of inventory items to the database.
+        /// </summary>
+        /// <param name="inventory">A list of InventoryItem objects to add to the database.</param>
         public static void AddInventory(List<UserObject.InventoryItem> inventory)
         {
             foreach (UserObject.InventoryItem item in inventory)
@@ -30,6 +48,10 @@ namespace GameShopManager
             }
         }
 
+        /// <summary>
+        /// Adds a single inventory item to the database.
+        /// </summary>
+        /// <param name="item">The InventoryItem object to add to the database.</param>
         public static void AddInventoryItem(UserObject.InventoryItem item)
         {
             using GameShopContext dbContext = new GameShopContext();
@@ -37,6 +59,10 @@ namespace GameShopManager
             dbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Deletes a list of inventory items from the database.
+        /// </summary>
+        /// <param name="inventory">A list of InventoryItem objects to delete from the database.</param>
         public static void DeleteUserInventory(List<UserObject.InventoryItem> inventory)
         {
             foreach (UserObject.InventoryItem item in inventory)
@@ -45,6 +71,10 @@ namespace GameShopManager
             }
         }
 
+        /// <summary>
+        /// Deletes a single inventory item from the database.
+        /// </summary>
+        /// <param name="item">The InventoryItem object to delete from the database.</param>
         public static void DeleteInventoryItem(UserObject.InventoryItem item)
         {
             using GameShopContext dbContext = new GameShopContext();
