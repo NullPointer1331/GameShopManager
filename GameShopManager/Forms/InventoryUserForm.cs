@@ -16,5 +16,15 @@ namespace GameShopManager.Forms
         {
             InitializeComponent();
         }
+
+        private void InventoryUserForm_Load(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            foreach (var ItemObject in ItemDB.GetAllItems())
+            {
+                listBox1.Items.Add(ItemObject.ItemName);
+            }
+            
+        }
     }
 }
