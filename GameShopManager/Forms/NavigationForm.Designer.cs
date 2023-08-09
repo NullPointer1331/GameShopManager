@@ -30,10 +30,10 @@
         {
             LoginUser = new Button();
             CreateUser = new Button();
-            AddItem = new Button();
+            CreateItem = new Button();
             DeleteItem = new Button();
             InventoryDisplay = new Button();
-            AddItemQuantity = new Button();
+            BuyItem = new Button();
             DeleteUser = new Button();
             label1 = new Label();
             label2 = new Label();
@@ -60,15 +60,15 @@
             CreateUser.UseVisualStyleBackColor = true;
             CreateUser.Click += CreateUser_Click;
             // 
-            // AddItem
+            // CreateItem
             // 
-            AddItem.Location = new Point(217, 61);
-            AddItem.Name = "AddItem";
-            AddItem.Size = new Size(100, 50);
-            AddItem.TabIndex = 2;
-            AddItem.Text = "Show Create Item Form";
-            AddItem.UseVisualStyleBackColor = true;
-            AddItem.Click += AddItem_Click;
+            CreateItem.Location = new Point(217, 61);
+            CreateItem.Name = "CreateItem";
+            CreateItem.Size = new Size(100, 50);
+            CreateItem.TabIndex = 2;
+            CreateItem.Text = "Show Create Item Form";
+            CreateItem.UseVisualStyleBackColor = true;
+            CreateItem.Click += CreateItem_Click;
             // 
             // DeleteItem
             // 
@@ -90,15 +90,15 @@
             InventoryDisplay.UseVisualStyleBackColor = true;
             InventoryDisplay.Click += InventoryDisplay_Click;
             // 
-            // AddItemQuantity
+            // BuyItem
             // 
-            AddItemQuantity.Location = new Point(217, 198);
-            AddItemQuantity.Name = "AddItemQuantity";
-            AddItemQuantity.Size = new Size(100, 50);
-            AddItemQuantity.TabIndex = 5;
-            AddItemQuantity.Text = "Show Buy Item Form";
-            AddItemQuantity.UseVisualStyleBackColor = true;
-            AddItemQuantity.Click += AddItemQuantity_Click;
+            BuyItem.Location = new Point(217, 198);
+            BuyItem.Name = "BuyItem";
+            BuyItem.Size = new Size(100, 50);
+            BuyItem.TabIndex = 5;
+            BuyItem.Text = "Show Buy Item Form";
+            BuyItem.UseVisualStyleBackColor = true;
+            BuyItem.Click += BuyItem_Click;
             // 
             // DeleteUser
             // 
@@ -146,10 +146,10 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(DeleteUser);
-            Controls.Add(AddItemQuantity);
+            Controls.Add(BuyItem);
             Controls.Add(InventoryDisplay);
             Controls.Add(DeleteItem);
-            Controls.Add(AddItem);
+            Controls.Add(CreateItem);
             Controls.Add(CreateUser);
             Controls.Add(LoginUser);
             Name = "NavigationForm";
@@ -162,10 +162,10 @@
 
         private Button LoginUser;
         private Button CreateUser;
-        private Button AddItem;
+        private Button CreateItem;
         private Button DeleteItem;
         private Button InventoryDisplay;
-        private Button AddItemQuantity;
+        private Button BuyItem;
         private Button DeleteUser;
         private Label label1;
         private Label label2;

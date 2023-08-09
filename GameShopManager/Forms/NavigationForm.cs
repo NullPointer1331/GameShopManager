@@ -16,6 +16,23 @@ namespace GameShopManager.Forms
         public NavigationForm()
         {
             InitializeComponent();
+            SetActiveButtons();
+        }
+
+        public void SetActiveButtons()
+        {
+            if (ActiveUser != null)
+            {
+                DeleteUser.Enabled = true;
+                BuyItem.Enabled = true;
+                InventoryDisplay.Enabled = true;
+            }
+            else
+            {
+                DeleteUser.Enabled = false;
+                BuyItem.Enabled = false;
+                InventoryDisplay.Enabled = false;
+            }
         }
 
         private void InventoryDisplay_Click(object sender, EventArgs e)
@@ -24,13 +41,13 @@ namespace GameShopManager.Forms
             form.Show();
         }
 
-        private void AddItem_Click(object sender, EventArgs e)
+        private void CreateItem_Click(object sender, EventArgs e)
         {
             CreateItemForm form = new CreateItemForm(this);
             form.Show();
         }
 
-        private void AddItemQuantity_Click(object sender, EventArgs e)
+        private void BuyItem_Click(object sender, EventArgs e)
         {
             AddItemForm form = new AddItemForm(this);
             form.Show();

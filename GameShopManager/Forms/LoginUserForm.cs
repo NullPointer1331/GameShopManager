@@ -50,6 +50,7 @@ namespace GameShopManager.Forms
                         {
                             navigationForm.ActiveUser = item;
                             MessageBox.Show($"Successfully Logged in as {item.UserName}");
+                            navigationForm.SetActiveButtons();
                             Close();
                         }
                     }
