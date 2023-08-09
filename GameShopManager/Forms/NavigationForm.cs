@@ -26,12 +26,14 @@ namespace GameShopManager.Forms
                 DeleteUser.Enabled = true;
                 BuyItem.Enabled = true;
                 InventoryDisplay.Enabled = true;
+                LogOut.Enabled = true;
             }
             else
             {
                 DeleteUser.Enabled = false;
                 BuyItem.Enabled = false;
                 InventoryDisplay.Enabled = false;
+                LogOut.Enabled = false;
             }
         }
 
@@ -77,8 +79,16 @@ namespace GameShopManager.Forms
             if (dialogResult == DialogResult.Yes)
             {
                 //delete active object
-                throw new NotImplementedException();
+                UserDB.DeleteUser(ActiveUser);
+                ActiveUser = null;
+                SetActiveButtons();
             }
+        }
+
+        private void LogOut_Click(object sender, EventArgs e)
+        {
+            ActiveUser = null;
+            SetActiveButtons();
         }
     }
 }

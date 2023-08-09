@@ -38,6 +38,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            LogOut = new Button();
             SuspendLayout();
             // 
             // LoginUser
@@ -137,11 +138,22 @@
             label3.TabIndex = 9;
             label3.Text = "User Actions";
             // 
+            // LogOut
+            // 
+            LogOut.Location = new Point(12, 269);
+            LogOut.Name = "LogOut";
+            LogOut.Size = new Size(100, 50);
+            LogOut.TabIndex = 10;
+            LogOut.Text = "Log Out";
+            LogOut.UseVisualStyleBackColor = true;
+            LogOut.Click += LogOut_Click;
+            // 
             // NavigationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(561, 450);
+            Controls.Add(LogOut);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -170,5 +182,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private Button LogOut;
     }
 }
