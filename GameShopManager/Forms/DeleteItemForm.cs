@@ -12,8 +12,14 @@ namespace GameShopManager.Forms
 {
     public partial class DeleteItemForm : Form
     {
+        NavigationForm navigationForm;
         public DeleteItemForm()
         {
+            InitializeComponent();
+        }
+        public DeleteItemForm(NavigationForm navigationForm)
+        {
+            this.navigationForm = navigationForm;
             InitializeComponent();
         }
     }

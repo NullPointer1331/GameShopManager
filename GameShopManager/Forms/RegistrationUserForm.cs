@@ -12,8 +12,14 @@ namespace GameShopManager.Forms
 {
     public partial class RegistrationUserForm : Form
     {
+        NavigationForm navigationForm;
         public RegistrationUserForm()
         {
+            InitializeComponent();
+        }
+        public RegistrationUserForm(NavigationForm navigationForm)
+        {
+            this.navigationForm = navigationForm;
             InitializeComponent();
         }
     }

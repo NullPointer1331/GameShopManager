@@ -12,11 +12,16 @@ namespace GameShopManager.Forms
 {
     public partial class InventoryUserForm : Form
     {
+        NavigationForm navigationForm;
         public InventoryUserForm()
         {
             InitializeComponent();
         }
-
+        public InventoryUserForm(NavigationForm navigationForm)
+        {
+            this.navigationForm = navigationForm;
+            InitializeComponent();
+        }
         private void InventoryUserForm_Load(object sender, EventArgs e)
         {
             listBox1.Items.Clear();

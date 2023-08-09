@@ -12,6 +12,7 @@ namespace GameShopManager.Forms
 {
     public partial class NavigationForm : Form
     {
+        internal UserObject ActiveUser { get; set; }
         public NavigationForm()
         {
             InitializeComponent();
@@ -19,37 +20,37 @@ namespace GameShopManager.Forms
 
         private void InventoryDisplay_Click(object sender, EventArgs e)
         {
-            InventoryUserForm form = new InventoryUserForm();
+            InventoryUserForm form = new InventoryUserForm(this);
             form.Show();
         }
 
         private void AddItem_Click(object sender, EventArgs e)
         {
-            CreateItemForm form = new CreateItemForm();
+            CreateItemForm form = new CreateItemForm(this);
             form.Show();
         }
 
         private void AddItemQuantity_Click(object sender, EventArgs e)
         {
-            AddItemForm form = new AddItemForm();
+            AddItemForm form = new AddItemForm(this);
             form.Show();
         }
 
         private void DeleteItem_Click(object sender, EventArgs e)
         {
-            DeleteItemForm form = new DeleteItemForm();
+            DeleteItemForm form = new DeleteItemForm(this);
             form.Show();
         }
 
         private void LoginUser_Click(object sender, EventArgs e)
         {
-            LoginUserForm form = new LoginUserForm();
+            LoginUserForm form = new LoginUserForm(this);
             form.Show();
         }
 
         private void CreateUser_Click(object sender, EventArgs e)
         {
-            RegistrationUserForm form = new RegistrationUserForm();
+            RegistrationUserForm form = new RegistrationUserForm(this);
             form.Show();
         }
 
