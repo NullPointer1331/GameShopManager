@@ -48,8 +48,9 @@ namespace GameShopManager.Forms
                     {
                         if (item.UserName == user && item.Password == password)
                         {
-                            NavigationForm form = new NavigationForm();
-                            form.Show();
+                            navigationForm.ActiveUser = item;
+                            MessageBox.Show($"Successfully Logged in as {item.UserName}");
+                            Close();
                         }
                     }
                 }
