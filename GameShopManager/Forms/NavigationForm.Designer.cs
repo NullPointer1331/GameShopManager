@@ -56,7 +56,7 @@
             CreateUser.Name = "CreateUser";
             CreateUser.Size = new Size(100, 50);
             CreateUser.TabIndex = 1;
-            CreateUser.Text = "Show Create Login Form";
+            CreateUser.Text = "Show Register User Form";
             CreateUser.UseVisualStyleBackColor = true;
             CreateUser.Click += CreateUser_Click;
             // 
@@ -72,7 +72,7 @@
             // 
             // DeleteItem
             // 
-            DeleteItem.Location = new Point(217, 198);
+            DeleteItem.Location = new Point(217, 128);
             DeleteItem.Name = "DeleteItem";
             DeleteItem.Size = new Size(100, 50);
             DeleteItem.TabIndex = 3;
@@ -92,11 +92,11 @@
             // 
             // AddItemQuantity
             // 
-            AddItemQuantity.Location = new Point(217, 128);
+            AddItemQuantity.Location = new Point(217, 198);
             AddItemQuantity.Name = "AddItemQuantity";
             AddItemQuantity.Size = new Size(100, 50);
             AddItemQuantity.TabIndex = 5;
-            AddItemQuantity.Text = "Show Add Quantity Form";
+            AddItemQuantity.Text = "Show Buy Item Form";
             AddItemQuantity.UseVisualStyleBackColor = true;
             AddItemQuantity.Click += AddItemQuantity_Click;
             // 
