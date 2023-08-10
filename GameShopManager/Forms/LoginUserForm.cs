@@ -33,10 +33,10 @@ namespace GameShopManager.Forms
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            string user = UsernameInput.Text.Trim();
-            string password = PasswordInput.Text.Trim();
             if (ValidInput())
             {
+                string user = UsernameInput.Text.Trim();
+                string password = PasswordInput.Text.Trim();
                 if (users == null)
                 {
                     //Edge case if db is empty
@@ -47,7 +47,7 @@ namespace GameShopManager.Forms
                     if (item.UserName == user && item.Password == password)
                     {
                         navigationForm.ActiveUser = item;
-                        MessageBox.Show($"Successfully Logged in as {item.UserName}");
+                        MessageBox.Show($"Successfully logged in as {item.UserName}");
                         navigationForm.SetActiveButtons();
                         Close();
                     }

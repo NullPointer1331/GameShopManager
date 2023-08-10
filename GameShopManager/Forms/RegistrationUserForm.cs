@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,15 +26,25 @@ namespace GameShopManager.Forms
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            
+            if(ValidInput())
+            {
+                string username = UsernameInput.Text.Trim();
+                string password = PasswordInput.Text.Trim();
+                UserObject user = new UserObject(username, password);
+                UserDB.AddUser(user);
+                navigationForm.ActiveUser = user;
+                MessageBox.Show($"Successfully created account and logged in as {user.UserName}");
+                navigationForm.SetActiveButtons();
+                Close();
+            }
         }
 
         private bool ValidInput()
         {
-            string user = UsernameInput.Text.Trim();
+            string username = UsernameInput.Text.Trim();
             string password = PasswordInput.Text.Trim();
             bool valid = true;
-            if (string.IsNullOrEmpty(user))
+            if (string.IsNullOrEmpty(username))
             {
                 UserError.Text = "Username is empty";
                 valid = false;
