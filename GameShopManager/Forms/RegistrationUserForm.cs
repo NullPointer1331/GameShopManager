@@ -22,5 +22,36 @@ namespace GameShopManager.Forms
             this.navigationForm = navigationForm;
             InitializeComponent();
         }
+
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private bool ValidInput()
+        {
+            string user = UsernameInput.Text.Trim();
+            string password = PasswordInput.Text.Trim();
+            bool valid = true;
+            if (!string.IsNullOrEmpty(user))
+            {
+                UserError.Text = "Username is empty";
+                valid = false;
+            }
+            else
+            {
+                UserError.Text = "";
+            }
+            if (!string.IsNullOrEmpty(password))
+            {
+                PasswordError.Text = "Password is empty";
+                valid = false;
+            }
+            else
+            {
+                PasswordError.Text = "";
+            }
+            return valid;
+        }
     }
 }

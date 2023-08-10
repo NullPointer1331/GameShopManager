@@ -96,6 +96,7 @@
             RegisterButton.TabIndex = 11;
             RegisterButton.Text = "Register";
             RegisterButton.UseVisualStyleBackColor = true;
+            RegisterButton.Click += RegisterButton_Click;
             // 
             // PasswordInput
             // 
