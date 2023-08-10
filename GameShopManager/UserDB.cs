@@ -42,6 +42,12 @@ namespace GameShopManager
             return user;
         }
 
+        /// <summary>
+        /// Gets a specific user from the database using their username and password
+        /// </summary>
+        /// <param name="userName">The UserName of the user to retrieve</param>
+        /// <param name="password">The Password of the user to retrieve</param>
+        /// <returns></returns>
         public static UserObject GetUser(string userName, string password)
         {
             using GameShopContext dbContext = new GameShopContext();
