@@ -60,7 +60,7 @@ namespace GameShopManager.Forms
             string user = UsernameInput.Text.Trim();
             string password = PasswordInput.Text.Trim();
             bool valid = true;
-            if (!string.IsNullOrEmpty(user))
+            if (string.IsNullOrEmpty(user))
             {
                 UserError.Text = "Username is empty";
                 valid = false;
@@ -69,7 +69,7 @@ namespace GameShopManager.Forms
             {
                 UserError.Text = "";
             }
-            if (!string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
             {
                 PasswordError.Text = "Password is empty";
                 valid = false;
@@ -83,8 +83,9 @@ namespace GameShopManager.Forms
 
         private void RegisterAccount_Click(object sender, EventArgs e)
         {
-            RegistrationUserForm form = new RegistrationUserForm();
-            form.ShowDialog();
+            RegistrationUserForm form = new RegistrationUserForm(navigationForm);
+            form.Show();
+            Close();
         }
     }
 }
