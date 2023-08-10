@@ -26,11 +26,11 @@ namespace GameShopManager.Forms
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            if(ValidInput())
+            if (ValidInput())
             {
-                string username = UsernameInput.Text.Trim();
+                string userName = UsernameInput.Text.Trim();
                 string password = PasswordInput.Text.Trim();
-                UserObject user = new UserObject(username, password);
+                UserObject user = new UserObject(userName, password);
                 UserDB.AddUser(user);
                 navigationForm.ActiveUser = user;
                 MessageBox.Show($"Successfully created account and logged in as {user.UserName}");
@@ -41,28 +41,30 @@ namespace GameShopManager.Forms
 
         private bool ValidInput()
         {
-            string username = UsernameInput.Text.Trim();
+            string userName = UsernameInput.Text.Trim();
             string password = PasswordInput.Text.Trim();
-            bool valid = true;
-            if (string.IsNullOrEmpty(username))
+            string errorText = "";
+            if (string.IsNullOrEmpty(userName))
             {
-                UserError.Text = "Username is empty";
-                valid = false;
-            }
-            else
-            {
-                UserError.Text = "";
+                errorText += "Username is empty \n";
             }
             if (string.IsNullOrEmpty(password))
             {
-                PasswordError.Text = "Password is empty";
-                valid = false;
+                errorText += "Password is empty \n";
+            }
+            if (UserDB.GetUser(userName, password) != null)
+            {
+                errorText += "A user with that username and password already exists";
+            }
+            if (!string.IsNullOrEmpty(errorText))
+            {
+                MessageBox.Show(errorText);
+                return false;
             }
             else
             {
-                PasswordError.Text = "";
+                return true;
             }
-            return valid;
         }
     }
 }

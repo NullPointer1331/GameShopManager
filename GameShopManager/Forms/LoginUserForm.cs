@@ -24,61 +24,49 @@ namespace GameShopManager.Forms
             InitializeComponent();
         }
 
-        List<UserObject>? users;
-
-        private void LoginUserForm_Load(object sender, EventArgs e)
-        {
-            users = UserDB.GetAllUsers();
-        }
-
         private void LoginButton_Click(object sender, EventArgs e)
         {
             if (ValidInput())
             {
-                string user = UsernameInput.Text.Trim();
+                string userName = UsernameInput.Text.Trim();
                 string password = PasswordInput.Text.Trim();
-                if (users == null)
+                UserObject user = UserDB.GetUser(userName, password);
+                if (user != null)
                 {
-                    //Edge case if db is empty
-                    return;
+                    navigationForm.ActiveUser = user;
+                    MessageBox.Show($"Successfully logged in as {user.UserName}");
+                    navigationForm.SetActiveButtons();
+                    Close();
                 }
-                foreach (UserObject item in users)
+                else
                 {
-                    if (item.UserName == user && item.Password == password)
-                    {
-                        navigationForm.ActiveUser = item;
-                        MessageBox.Show($"Successfully logged in as {item.UserName}");
-                        navigationForm.SetActiveButtons();
-                        Close();
-                    }
+                    MessageBox.Show("No user with that username and password exists");
                 }
             }
         }
 
         private bool ValidInput()
         {
-            string user = UsernameInput.Text.Trim();
+            string userName = UsernameInput.Text.Trim();
             string password = PasswordInput.Text.Trim();
-            bool valid = true;
-            if (string.IsNullOrEmpty(user))
+            string errorText = "";
+            if (string.IsNullOrEmpty(userName))
             {
-                UserError.Text = "Username is empty";
-                valid = false;
-            }
-            else
-            {
-                UserError.Text = "";
+                errorText += "Username is empty \n";
             }
             if (string.IsNullOrEmpty(password))
             {
-                PasswordError.Text = "Password is empty";
-                valid = false;
+                errorText += "Password is empty \n";
+            }
+            if (!string.IsNullOrEmpty(errorText))
+            {
+                MessageBox.Show(errorText);
+                return false;
             }
             else
             {
-                PasswordError.Text = "";
+                return true;
             }
-            return valid;
         }
 
         private void RegisterAccount_Click(object sender, EventArgs e)

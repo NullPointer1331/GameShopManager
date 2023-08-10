@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            PasswordError = new Label();
-            UserError = new Label();
             PasswordLabel = new Label();
             UsernameLabel = new Label();
             GameTitle = new Label();
@@ -37,26 +35,6 @@
             PasswordInput = new TextBox();
             UsernameInput = new TextBox();
             SuspendLayout();
-            // 
-            // PasswordError
-            // 
-            PasswordError.AutoSize = true;
-            PasswordError.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            PasswordError.ForeColor = Color.Crimson;
-            PasswordError.Location = new Point(314, 116);
-            PasswordError.Name = "PasswordError";
-            PasswordError.Size = new Size(0, 25);
-            PasswordError.TabIndex = 16;
-            // 
-            // UserError
-            // 
-            UserError.AutoSize = true;
-            UserError.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            UserError.ForeColor = Color.Crimson;
-            UserError.Location = new Point(314, 64);
-            UserError.Name = "UserError";
-            UserError.Size = new Size(0, 25);
-            UserError.TabIndex = 15;
             // 
             // PasswordLabel
             // 
@@ -118,8 +96,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(434, 251);
-            Controls.Add(PasswordError);
-            Controls.Add(UserError);
             Controls.Add(PasswordLabel);
             Controls.Add(UsernameLabel);
             Controls.Add(GameTitle);
@@ -133,9 +109,6 @@
         }
 
         #endregion
-
-        private Label PasswordError;
-        private Label UserError;
         private Label PasswordLabel;
         private Label UsernameLabel;
         private Label GameTitle;

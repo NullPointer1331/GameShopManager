@@ -42,6 +42,17 @@ namespace GameShopManager
             return user;
         }
 
+        public static UserObject GetUser(string userName, string password)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            UserObject user = dbContext.Users.Where(u => u.UserName == userName && u.Password == password).FirstOrDefault();
+            if (user != null)
+            {
+                user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
+            }
+            return user;
+        }
+
         /// <summary>
         /// Adds a new user to the database.
         /// </summary>

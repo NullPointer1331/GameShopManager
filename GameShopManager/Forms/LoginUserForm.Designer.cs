@@ -35,8 +35,6 @@
             GameTitle = new Label();
             UsernameLabel = new Label();
             PasswordLabel = new Label();
-            UserError = new Label();
-            PasswordError = new Label();
             SuspendLayout();
             // 
             // UsernameInput
@@ -56,7 +54,7 @@
             // 
             // LoginButton
             // 
-            LoginButton.Location = new Point(187, 151);
+            LoginButton.Location = new Point(187, 165);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(91, 41);
             LoginButton.TabIndex = 2;
@@ -66,7 +64,7 @@
             // 
             // RegisterAccount
             // 
-            RegisterAccount.Location = new Point(195, 211);
+            RegisterAccount.Location = new Point(195, 226);
             RegisterAccount.Name = "RegisterAccount";
             RegisterAccount.Size = new Size(75, 23);
             RegisterAccount.TabIndex = 3;
@@ -104,33 +102,11 @@
             PasswordLabel.TabIndex = 6;
             PasswordLabel.Text = "Password:";
             // 
-            // UserError
-            // 
-            UserError.AutoSize = true;
-            UserError.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            UserError.ForeColor = Color.Crimson;
-            UserError.Location = new Point(340, 68);
-            UserError.Name = "UserError";
-            UserError.Size = new Size(0, 25);
-            UserError.TabIndex = 7;
-            // 
-            // PasswordError
-            // 
-            PasswordError.AutoSize = true;
-            PasswordError.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            PasswordError.ForeColor = Color.Crimson;
-            PasswordError.Location = new Point(340, 120);
-            PasswordError.Name = "PasswordError";
-            PasswordError.Size = new Size(0, 25);
-            PasswordError.TabIndex = 8;
-            // 
             // LoginUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(461, 277);
-            Controls.Add(PasswordError);
-            Controls.Add(UserError);
             Controls.Add(PasswordLabel);
             Controls.Add(UsernameLabel);
             Controls.Add(GameTitle);
@@ -140,7 +116,6 @@
             Controls.Add(UsernameInput);
             Name = "LoginUserForm";
             Text = "LoginUserForm";
-            Load += LoginUserForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -154,7 +129,5 @@
         private Label GameTitle;
         private Label UsernameLabel;
         private Label PasswordLabel;
-        private Label UserError;
-        private Label PasswordError;
     }
 }
