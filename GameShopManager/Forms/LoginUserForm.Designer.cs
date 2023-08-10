@@ -41,7 +41,7 @@
             // 
             // UsernameInput
             // 
-            UsernameInput.Location = new Point(250, 70);
+            UsernameInput.Location = new Point(182, 70);
             UsernameInput.Multiline = true;
             UsernameInput.Name = "UsernameInput";
             UsernameInput.Size = new Size(100, 23);
@@ -49,14 +49,14 @@
             // 
             // PasswordInput
             // 
-            PasswordInput.Location = new Point(250, 122);
+            PasswordInput.Location = new Point(182, 122);
             PasswordInput.Name = "PasswordInput";
             PasswordInput.Size = new Size(100, 23);
             PasswordInput.TabIndex = 1;
             // 
             // LoginButton
             // 
-            LoginButton.Location = new Point(250, 151);
+            LoginButton.Location = new Point(187, 151);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(91, 41);
             LoginButton.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             // RegisterAccount
             // 
-            RegisterAccount.Location = new Point(259, 211);
+            RegisterAccount.Location = new Point(195, 211);
             RegisterAccount.Name = "RegisterAccount";
             RegisterAccount.Size = new Size(75, 23);
             RegisterAccount.TabIndex = 3;
@@ -78,7 +78,7 @@
             // 
             GameTitle.AutoSize = true;
             GameTitle.Font = new Font("Segoe UI", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            GameTitle.Location = new Point(235, 9);
+            GameTitle.Location = new Point(183, 9);
             GameTitle.Name = "GameTitle";
             GameTitle.Size = new Size(99, 54);
             GameTitle.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             UsernameLabel.AutoSize = true;
             UsernameLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            UsernameLabel.Location = new Point(143, 68);
+            UsernameLabel.Location = new Point(75, 68);
             UsernameLabel.Name = "UsernameLabel";
             UsernameLabel.Size = new Size(101, 25);
             UsernameLabel.TabIndex = 5;
@@ -98,7 +98,7 @@
             // 
             PasswordLabel.AutoSize = true;
             PasswordLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            PasswordLabel.Location = new Point(143, 117);
+            PasswordLabel.Location = new Point(75, 117);
             PasswordLabel.Name = "PasswordLabel";
             PasswordLabel.Size = new Size(95, 25);
             PasswordLabel.TabIndex = 6;
@@ -109,7 +109,7 @@
             UserError.AutoSize = true;
             UserError.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             UserError.ForeColor = Color.Crimson;
-            UserError.Location = new Point(392, 68);
+            UserError.Location = new Point(340, 68);
             UserError.Name = "UserError";
             UserError.Size = new Size(0, 25);
             UserError.TabIndex = 7;
@@ -119,7 +119,7 @@
             PasswordError.AutoSize = true;
             PasswordError.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             PasswordError.ForeColor = Color.Crimson;
-            PasswordError.Location = new Point(392, 120);
+            PasswordError.Location = new Point(340, 120);
             PasswordError.Name = "PasswordError";
             PasswordError.Size = new Size(0, 25);
             PasswordError.TabIndex = 8;
@@ -128,7 +128,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(625, 374);
+            ClientSize = new Size(461, 277);
             Controls.Add(PasswordError);
             Controls.Add(UserError);
             Controls.Add(PasswordLabel);
