@@ -24,10 +24,26 @@ namespace GameShopManager.Forms
         }
         private void InventoryUserForm_Load(object sender, EventArgs e)
         {
-            foreach (var ItemObject in ItemDB.GetAllItems())
+            List<string> list = new List<string>();
+            foreach (var itemObject in navigationForm.Inventory)
             {
-                listBox1.Items.Add(ItemObject.ItemName);
+                //Add each new item
+                if (!listBox1.Items.Contains(itemObject))
+                {
+                    listBox1.Items.Add(itemObject.ItemName);
+                }
+                list.Add(itemObject.ItemName);
+                
             }
+            foreach (var itemName in list)
+            {
+                if (!list.Contains(itemName))
+                {
+                    listBox1.Items.Remove(itemName);
+                }
+            }
+            //Remove refrences
+            list = null;
             
         }
     }
