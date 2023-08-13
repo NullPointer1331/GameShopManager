@@ -13,7 +13,7 @@ namespace GameShopManager.Forms
     public partial class NavigationForm : Form
     {
         internal UserObject ActiveUser { get; set; }
-        internal List<UserObject.InventoryItem> Inventory { get; set; }
+        internal List<CombinedObject> Inventory { get; set; }
 
         public NavigationForm()
         {

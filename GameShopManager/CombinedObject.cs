@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class CombinedObject
+namespace GameShopManager
 {
-	public CombinedObject()
+	internal class CombinedObject()
 	{
         /// <summary>
         /// The item object
