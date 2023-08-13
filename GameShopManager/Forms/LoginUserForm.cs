@@ -35,7 +35,7 @@ namespace GameShopManager.Forms
                 {
                     navigationForm.ActiveUser = user;
                     //Getting all items early to reduce ping time
-                    navigationForm.Inventory = ItemDB.GetAllItems();
+                    navigationForm.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
                     MessageBox.Show($"Successfully logged in as {user.UserName}");
                     navigationForm.SetActiveButtons();
                     Close();
