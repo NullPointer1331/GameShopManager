@@ -35,7 +35,17 @@ namespace GameShopManager.Forms
                 {
                     navigationForm.ActiveUser = user;
                     //Getting all items early to reduce ping time
-                    navigationForm.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
+                    List<CombinedObject> returnList = new List<CombinedObject>();
+                    foreach(var invItem in InventoryItemDB.GetUserInventory(user.UserID))
+                    {
+                        //Creating a combined object for easier usage
+                        CombinedObject combinedObject = new(ItemDB.GetItem(invItem.ItemID), invItem);
+                        returnList.Add(combinedObject);
+                    }
+                    navigationForm.Inventory = returnList;
+                    //Remove refrences
+                    returnList = null;
+
                     MessageBox.Show($"Successfully logged in as {user.UserName}");
                     navigationForm.SetActiveButtons();
                     Close();
