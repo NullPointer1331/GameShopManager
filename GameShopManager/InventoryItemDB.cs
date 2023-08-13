@@ -42,9 +42,12 @@ namespace GameShopManager
         /// <param name="inventory">A list of InventoryItem objects to add to the database.</param>
         public static void AddInventory(List<UserObject.InventoryItem> inventory)
         {
-            foreach (UserObject.InventoryItem item in inventory)
+            if (inventory != null)
             {
-                AddInventoryItem(item);
+                foreach (UserObject.InventoryItem item in inventory)
+                {
+                    AddInventoryItem(item);
+                }
             }
         }
 
@@ -65,9 +68,12 @@ namespace GameShopManager
         /// <param name="inventory">A list of InventoryItem objects to delete from the database.</param>
         public static void DeleteInventoryItems(List<UserObject.InventoryItem> inventory)
         {
-            foreach (UserObject.InventoryItem item in inventory)
+            if (inventory != null)
             {
-                DeleteInventoryItem(item);
+                foreach (UserObject.InventoryItem item in inventory)
+                {
+                    DeleteInventoryItem(item);
+                }
             }
         }
 
