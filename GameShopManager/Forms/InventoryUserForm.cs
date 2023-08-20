@@ -25,9 +25,9 @@ namespace GameShopManager.Forms
         private void InventoryUserForm_Load(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            foreach (var ItemObject in ItemDB.GetAllItems())
+            foreach (var ItemObject in navigationForm.ActiveUser.Inventory)
             {
-                listBox1.Items.Add(ItemObject.ItemName);
+                listBox1.Items.Add(ItemObject.LinkedObject.ItemName + " Quantity: " + ItemObject.Quantity);
             }
             
         }
