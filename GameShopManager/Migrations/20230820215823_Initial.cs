@@ -5,7 +5,7 @@
 namespace GameShopManager.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,13 +56,6 @@ namespace GameShopManager.Migrations
                         column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
-                    //I added this foreign key manually because it wasn't being generated
-                    table.ForeignKey(
-                        name: "FK_InventoryItems_Items_ItemID",
-                        column: x => x.ItemID,
-                        principalTable: "Items",
-                        principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
                 });
         }
