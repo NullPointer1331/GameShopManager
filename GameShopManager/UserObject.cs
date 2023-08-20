@@ -85,6 +85,13 @@ namespace GameShopManager
             /// The quantity of the item
             /// </summary>
             public int Quantity { get; set; }
+
+
+            /// <summary>
+            /// The ItemObject that correpsonds with the id
+            /// </summary>
+            [NotMapped]
+            public ItemObject? LinkedObject { get; set; }
         }
     }
 }
