@@ -27,7 +27,11 @@ namespace GameShopManager.Forms
             listBox1.Items.Clear();
             foreach (var ItemObject in navigationForm.ActiveUser.Inventory)
             {
-                listBox1.Items.Add(ItemObject.LinkedObject.ItemName + " Quantity: " + ItemObject.Quantity);
+                //Check since linkedobject could not be loaded yet
+                if (ItemObject.LinkedObject != null)
+                {
+                    listBox1.Items.Add(ItemObject.LinkedObject.ItemName + " Quantity: " + ItemObject.Quantity);
+                }
             }
             
         }
