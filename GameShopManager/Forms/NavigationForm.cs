@@ -28,6 +28,7 @@ namespace GameShopManager.Forms
                 BuyItem.Enabled = true;
                 InventoryDisplay.Enabled = true;
                 LogOut.Enabled = true;
+                activeUserLabel.Text = "Logged in as " + ActiveUser.UserName;
             }
             else
             {
@@ -35,6 +36,7 @@ namespace GameShopManager.Forms
                 BuyItem.Enabled = false;
                 InventoryDisplay.Enabled = false;
                 LogOut.Enabled = false;
+                activeUserLabel.Text = "Not logged in";
             }
         }
 

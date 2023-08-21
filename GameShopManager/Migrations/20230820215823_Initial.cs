@@ -57,6 +57,13 @@ namespace GameShopManager.Migrations
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
+                    //I added this foreign key again manually because it wasn't being generated
+                    table.ForeignKey(
+                        name: "FK_InventoryItems_Items_ItemID",
+                        column: x => x.ItemID,
+                        principalTable: "Items",
+                        principalColumn: "ItemID",
+                        onDelete: ReferentialAction.Cascade);
                 });
         }
 

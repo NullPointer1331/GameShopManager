@@ -108,13 +108,13 @@ namespace GameShopManager
             /// <summary>
             /// The Id of the user who owns the item
             /// </summary>
-            [ForeignKey("UserID")]
+            [ForeignKey(nameof(UserID))]
             public int UserID { get; set; }
 
             /// <summary>
             /// The Id of the item
             /// </summary>
-            [ForeignKey("ItemID")] //I manually added the foreign key to the database since this wasn't working
+            [ForeignKey(nameof(ItemID))] //This still doesn't generate a foreign key for some reason
             public int ItemID { get; set; }
 
             /// <summary>

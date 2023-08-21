@@ -42,7 +42,7 @@ namespace GameShopManager.Migrations
 
                     b.HasKey("ItemID");
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", (string)null);
                 });
 
             modelBuilder.Entity("GameShopManager.UserObject", b =>
@@ -66,7 +66,7 @@ namespace GameShopManager.Migrations
 
                     b.HasKey("UserID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("GameShopManager.UserObject+InventoryItem", b =>
@@ -82,7 +82,7 @@ namespace GameShopManager.Migrations
 
                     b.HasKey("UserID", "ItemID");
 
-                    b.ToTable("InventoryItems");
+                    b.ToTable("InventoryItems", (string)null);
                 });
 
             modelBuilder.Entity("GameShopManager.UserObject+InventoryItem", b =>
