@@ -20,6 +20,9 @@ namespace GameShopManager.Forms
             SetActiveButtons();
         }
 
+        /// <summary>
+        /// Checks if a user is logged in and sets the buttons accordingly
+        /// </summary>
         public void SetActiveButtons()
         {
             if (ActiveUser != null)

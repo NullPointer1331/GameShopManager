@@ -24,6 +24,10 @@ namespace GameShopManager.Forms
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Checks if the inputs are valid, shows a messagebox with errors if they aren't
+        /// </summary>
+        /// <returns>Returns true if inputs are valid, false otherwise</returns>
         private bool ValidInput()
         {
             string errorMessages = "";

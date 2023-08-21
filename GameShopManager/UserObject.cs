@@ -68,6 +68,12 @@ namespace GameShopManager
             Inventory = new List<InventoryItem>();
         }
 
+        /// <summary>
+        /// Adds an item to the user's inventory, if the item already exists in the inventory, it will increase the quantity
+        /// Also updates the database
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="quantity"></param>
         public void AddItem(ItemObject item, int quantity)
         {
             InventoryItem? existingItem = GetItem(item.ItemID);
@@ -90,6 +96,12 @@ namespace GameShopManager
             }
         }
 
+        /// <summary>
+        /// If an item exists in the user's inventory, it returns it
+        /// otherwise it returns null
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <returns>The inventory item with a corresponding itemID, or null if no such item exists</returns>
         public InventoryItem GetItem(int itemID)
         {
             foreach (InventoryItem item in Inventory)

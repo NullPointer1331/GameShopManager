@@ -67,6 +67,10 @@ namespace GameShopManager
             dbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Updates an inventory item in the database.
+        /// </summary>
+        /// <param name="item"></param>
         public static void UpdateInventoryItem(UserObject.InventoryItem item)
         {
             using GameShopContext dbContext = new GameShopContext();
