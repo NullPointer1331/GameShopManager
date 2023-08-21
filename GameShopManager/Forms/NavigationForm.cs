@@ -13,6 +13,7 @@ namespace GameShopManager.Forms
     public partial class NavigationForm : Form
     {
         internal UserObject ActiveUser { get; set; }
+        internal List<UserObject.InventoryItem> InventoryItems { get; set; }
         public NavigationForm()
         {
             InitializeComponent();

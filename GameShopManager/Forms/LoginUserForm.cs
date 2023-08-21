@@ -34,6 +34,11 @@ namespace GameShopManager.Forms
                 if (user != null)
                 {
                     navigationForm.ActiveUser = user;
+                    //Add linked object on signin as it's not mapped to db
+                    foreach (var ItemObject in user.Inventory)
+                    {
+                        ItemObject.LinkedObject = ItemDB.GetItem(ItemObject.ItemID);
+                    }
                     MessageBox.Show($"Successfully logged in as {user.UserName}");
                     navigationForm.SetActiveButtons();
                     Close();
