@@ -51,6 +51,7 @@ namespace GameShopManager
             UserName = userName;
             Password = password;
             Cash = 0;
+            Inventory = new List<InventoryItem>();
         }
 
         /// <summary>
@@ -64,6 +65,41 @@ namespace GameShopManager
             UserName = userName;
             Password = password;
             Cash = cash;
+            Inventory = new List<InventoryItem>();
+        }
+
+        public void AddItem(ItemObject item, int quantity)
+        {
+            InventoryItem? existingItem = GetItem(item.ItemID);
+            if (existingItem != null)
+            {
+                existingItem.Quantity += quantity;
+                InventoryItemDB.UpdateInventoryItem(existingItem);
+            }
+            else
+            {
+                InventoryItem newItem = new InventoryItem()
+                {
+                    ItemID = item.ItemID,
+                    UserID = UserID,
+                    Quantity = quantity,
+                    LinkedObject = item
+                };
+                Inventory.Add(newItem);
+                InventoryItemDB.AddInventoryItem(newItem);
+            }
+        }
+
+        public InventoryItem GetItem(int itemID)
+        {
+            foreach (InventoryItem item in Inventory)
+            {
+                if (item.ItemID == itemID)
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
         [PrimaryKey(nameof(UserID), nameof(ItemID))]

@@ -67,6 +67,13 @@ namespace GameShopManager
             dbContext.SaveChanges();
         }
 
+        public static void UpdateInventoryItem(UserObject.InventoryItem item)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            dbContext.InventoryItems.Update(item);
+            dbContext.SaveChanges();
+        }
+
         /// <summary>
         /// Deletes a list of inventory items from the database.
         /// </summary>
