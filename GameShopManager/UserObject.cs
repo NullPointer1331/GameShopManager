@@ -70,7 +70,7 @@ namespace GameShopManager
 
         /// <summary>
         /// Adds an item to the user's inventory, if the item already exists in the inventory, it will increase the quantity
-        /// Also updates the database
+        /// Updates the database appropriately.
         /// </summary>
         /// <param name="item"></param>
         /// <param name="quantity"></param>
@@ -93,6 +93,27 @@ namespace GameShopManager
                 };
                 Inventory.Add(newItem);
                 InventoryItemDB.AddInventoryItem(newItem);
+            }
+        }
+
+        /// <summary>
+        /// Reduces the quantity of an item in the user's inventory, 
+        /// if the quantity reaches 0, it will remove the item from the inventory.
+        /// Updates the database appropriately.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="quantity"></param>
+        public void RemoveItem(InventoryItem item, int quantity)
+        {
+            if (item.Quantity > quantity)
+            {
+                item.Quantity -= quantity;
+                InventoryItemDB.UpdateInventoryItem(item);
+            }
+            else
+            {
+                Inventory.Remove(item);
+                InventoryItemDB.DeleteInventoryItem(item);
             }
         }
 
