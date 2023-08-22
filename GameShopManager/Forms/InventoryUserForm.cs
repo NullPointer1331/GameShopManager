@@ -24,16 +24,31 @@ namespace GameShopManager.Forms
         }
         private void InventoryUserForm_Load(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            inventoryListBox.Items.Clear();
             foreach (var ItemObject in navigationForm.ActiveUser.Inventory)
             {
                 //Check since linkedobject could not be loaded yet
                 if (ItemObject.LinkedObject != null)
                 {
-                    listBox1.Items.Add(ItemObject.LinkedObject.ItemName + " Quantity: " + ItemObject.Quantity);
+                    inventoryListBox.Items.Add(ItemObject.LinkedObject.ItemName + " Quantity: " + ItemObject.Quantity);
                 }
             }
-            
+
+        }
+
+        private void RemoveItemsBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SetQuantity1Btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SetQuantityMaxBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
