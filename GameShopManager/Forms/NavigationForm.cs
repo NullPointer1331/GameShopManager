@@ -20,6 +20,9 @@ namespace GameShopManager.Forms
             SetActiveButtons();
         }
 
+        /// <summary>
+        /// Checks if a user is logged in and sets the buttons accordingly
+        /// </summary>
         public void SetActiveButtons()
         {
             if (ActiveUser != null)
@@ -28,6 +31,7 @@ namespace GameShopManager.Forms
                 BuyItem.Enabled = true;
                 InventoryDisplay.Enabled = true;
                 LogOut.Enabled = true;
+                activeUserLabel.Text = "Logged in as " + ActiveUser.UserName;
             }
             else
             {
@@ -35,6 +39,7 @@ namespace GameShopManager.Forms
                 BuyItem.Enabled = false;
                 InventoryDisplay.Enabled = false;
                 LogOut.Enabled = false;
+                activeUserLabel.Text = "Not logged in";
             }
         }
 

@@ -20,6 +20,10 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             List<UserObject.InventoryItem> inventory = dbContext.InventoryItems.Where(i => i.UserID == userID).ToList();
+            foreach (UserObject.InventoryItem item in inventory)
+            {
+                item.LinkedObject = dbContext.Items.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
+            }
             return inventory;
         }
 
@@ -33,6 +37,7 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             UserObject.InventoryItem inventoryItem = dbContext.InventoryItems.Where(i => i.UserID == userID && i.ItemID == itemID).FirstOrDefault();
+            inventoryItem.LinkedObject = dbContext.Items.Where(i => i.ItemID == inventoryItem.ItemID).FirstOrDefault();
             return inventoryItem;
         }
 
@@ -59,6 +64,17 @@ namespace GameShopManager
         {
             using GameShopContext dbContext = new GameShopContext();
             dbContext.InventoryItems.Add(item);
+            dbContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Updates an inventory item in the database.
+        /// </summary>
+        /// <param name="item"></param>
+        public static void UpdateInventoryItem(UserObject.InventoryItem item)
+        {
+            using GameShopContext dbContext = new GameShopContext();
+            dbContext.InventoryItems.Update(item);
             dbContext.SaveChanges();
         }
 

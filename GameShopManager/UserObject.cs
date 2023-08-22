@@ -51,6 +51,7 @@ namespace GameShopManager
             UserName = userName;
             Password = password;
             Cash = 0;
+            Inventory = new List<InventoryItem>();
         }
 
         /// <summary>
@@ -64,6 +65,53 @@ namespace GameShopManager
             UserName = userName;
             Password = password;
             Cash = cash;
+            Inventory = new List<InventoryItem>();
+        }
+
+        /// <summary>
+        /// Adds an item to the user's inventory, if the item already exists in the inventory, it will increase the quantity
+        /// Also updates the database
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="quantity"></param>
+        public void AddItem(ItemObject item, int quantity)
+        {
+            InventoryItem? existingItem = GetItem(item.ItemID);
+            if (existingItem != null)
+            {
+                existingItem.Quantity += quantity;
+                InventoryItemDB.UpdateInventoryItem(existingItem);
+            }
+            else
+            {
+                InventoryItem newItem = new InventoryItem()
+                {
+                    ItemID = item.ItemID,
+                    UserID = UserID,
+                    Quantity = quantity,
+                    LinkedObject = item
+                };
+                Inventory.Add(newItem);
+                InventoryItemDB.AddInventoryItem(newItem);
+            }
+        }
+
+        /// <summary>
+        /// If an item exists in the user's inventory, it returns it
+        /// otherwise it returns null
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <returns>The inventory item with a corresponding itemID, or null if no such item exists</returns>
+        public InventoryItem GetItem(int itemID)
+        {
+            foreach (InventoryItem item in Inventory)
+            {
+                if (item.ItemID == itemID)
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
         [PrimaryKey(nameof(UserID), nameof(ItemID))]
@@ -72,13 +120,13 @@ namespace GameShopManager
             /// <summary>
             /// The Id of the user who owns the item
             /// </summary>
-            [ForeignKey("UserID")]
+            [ForeignKey(nameof(UserID))]
             public int UserID { get; set; }
 
             /// <summary>
             /// The Id of the item
             /// </summary>
-            [ForeignKey("ItemID")] //I manually added the foreign key to the database since this wasn't working
+            [ForeignKey(nameof(ItemID))] //This still doesn't generate a foreign key for some reason
             public int ItemID { get; set; }
 
             /// <summary>

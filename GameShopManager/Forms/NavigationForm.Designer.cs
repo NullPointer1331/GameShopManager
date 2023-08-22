@@ -39,6 +39,7 @@
             label2 = new Label();
             label3 = new Label();
             LogOut = new Button();
+            activeUserLabel = new Label();
             SuspendLayout();
             // 
             // LoginUser
@@ -148,11 +149,21 @@
             LogOut.UseVisualStyleBackColor = true;
             LogOut.Click += LogOut_Click;
             // 
+            // activeUserLabel
+            // 
+            activeUserLabel.AutoSize = true;
+            activeUserLabel.Location = new Point(12, 426);
+            activeUserLabel.Name = "activeUserLabel";
+            activeUserLabel.Size = new Size(83, 15);
+            activeUserLabel.TabIndex = 11;
+            activeUserLabel.Text = "Not Logged In";
+            // 
             // NavigationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(561, 450);
+            Controls.Add(activeUserLabel);
             Controls.Add(LogOut);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -183,5 +194,6 @@
         private Label label2;
         private Label label3;
         private Button LogOut;
+        private Label activeUserLabel;
     }
 }

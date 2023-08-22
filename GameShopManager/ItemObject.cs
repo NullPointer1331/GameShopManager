@@ -40,5 +40,10 @@ namespace GameShopManager
             ItemDescription = itemDescription;
             ItemPrice = itemPrice;
         }
+
+        public string ToString()
+        {
+            return $"{ItemName}: {ItemDescription}. Costs: {ItemPrice}";
+        }
     }
 }
