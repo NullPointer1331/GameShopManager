@@ -96,6 +96,20 @@ namespace GameShopManager
             }
         }
 
+        public void RemoveItem(InventoryItem item, int quantity)
+        {
+            if (item.Quantity > quantity)
+            {
+                item.Quantity -= quantity;
+                InventoryItemDB.UpdateInventoryItem(item);
+            }
+            else
+            {
+                Inventory.Remove(item);
+                InventoryItemDB.DeleteInventoryItem(item);
+            }
+        }
+
         /// <summary>
         /// If an item exists in the user's inventory, it returns it
         /// otherwise it returns null

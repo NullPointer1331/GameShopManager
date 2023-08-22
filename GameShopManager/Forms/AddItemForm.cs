@@ -41,9 +41,9 @@ namespace GameShopManager.Forms
             }
             else
             {
-                if (!int.TryParse(quantityTextBox.Text, out _))
+                if (!int.TryParse(quantityTextBox.Text, out int q) || q < 1)
                 {
-                    errorMessages += "Please enter a valid quantity.\n";
+                    errorMessages += "Please enter a positive number.\n";
                 }
             }
             if (errorMessages != "")
