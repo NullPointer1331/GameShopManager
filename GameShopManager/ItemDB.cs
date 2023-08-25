@@ -27,10 +27,10 @@ namespace GameShopManager
         /// </summary>
         /// <param name="id">The ID of the ItemObject to retrieve.</param>
         /// <returns>The ItemObject with the specified ID, or null if it is not found.</returns>
-        public static ItemObject GetItem(int id)
+        public static ItemObject? GetItem(int id)
         {
             using GameShopContext dbContext = new GameShopContext();
-            ItemObject item = dbContext.Items.Where(i => i.ItemID == id).FirstOrDefault();
+            ItemObject? item = dbContext.Items.Find(id);
             return item;
         }
 
@@ -75,10 +75,13 @@ namespace GameShopManager
         public static void DeleteItem(int id)
         {
             using GameShopContext dbContext = new GameShopContext();
-            ItemObject item = dbContext.Items.Where(i => i.ItemID == id).FirstOrDefault();
-            InventoryItemDB.DeleteAllOfItem(item.ItemID);
-            dbContext.Items.Remove(item);
-            dbContext.SaveChanges();
+            ItemObject? item = dbContext.Items.Find(id);
+            if(item != null)
+            {
+                InventoryItemDB.DeleteAllOfItem(item.ItemID);
+                dbContext.Items.Remove(item);
+                dbContext.SaveChanges();
+            }
         }
     }
 }
