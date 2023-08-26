@@ -31,10 +31,10 @@ namespace GameShopManager
         /// </summary>
         /// <param name="id">The ID of the user to retrieve.</param>
         /// <returns>A UserObject containing the user with the given ID, or null if not found.</returns>
-        public static UserObject GetUser(int id)
+        public static UserObject? GetUser(int id)
         {
             using GameShopContext dbContext = new GameShopContext();
-            UserObject user = dbContext.Users.Where(u => u.UserID == id).FirstOrDefault();
+            UserObject? user = dbContext.Users.Find(id);
             if (user != null)
             {
                 user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
@@ -48,10 +48,10 @@ namespace GameShopManager
         /// <param name="userName">The UserName of the user to retrieve</param>
         /// <param name="password">The Password of the user to retrieve</param>
         /// <returns></returns>
-        public static UserObject GetUser(string userName, string password)
+        public static UserObject? GetUser(string userName, string password)
         {
             using GameShopContext dbContext = new GameShopContext();
-            UserObject user = dbContext.Users.Where(u => u.UserName == userName && u.Password == password).FirstOrDefault();
+            UserObject? user = dbContext.Users.Where(u => u.UserName == userName && u.Password == password).FirstOrDefault();
             if (user != null)
             {
                 user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
@@ -104,10 +104,13 @@ namespace GameShopManager
         public static void DeleteUser(int id)
         {
             using GameShopContext dbContext = new GameShopContext();
-            UserObject user = dbContext.Users.Where(u => u.UserID == id).FirstOrDefault();
-            InventoryItemDB.DeleteInventoryItems(user.Inventory);
-            dbContext.Users.Remove(user);
-            dbContext.SaveChanges();
+            UserObject? user = dbContext.Users.Find(id);
+            if(user != null)
+            {
+                InventoryItemDB.DeleteInventoryItems(user.Inventory);
+                dbContext.Users.Remove(user);
+                dbContext.SaveChanges();
+            }
         }
     }
 }

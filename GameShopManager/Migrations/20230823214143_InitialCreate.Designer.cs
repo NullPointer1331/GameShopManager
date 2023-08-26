@@ -11,15 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameShopManager.Migrations
 {
     [DbContext(typeof(GameShopContext))]
-    [Migration("20230820215823_Initial")]
-    partial class Initial
+    [Migration("20230823214143_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -85,16 +85,26 @@ namespace GameShopManager.Migrations
 
                     b.HasKey("UserID", "ItemID");
 
+                    b.HasIndex("ItemID");
+
                     b.ToTable("InventoryItems");
                 });
 
             modelBuilder.Entity("GameShopManager.UserObject+InventoryItem", b =>
                 {
+                    b.HasOne("GameShopManager.ItemObject", "LinkedObject")
+                        .WithMany()
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GameShopManager.UserObject", null)
                         .WithMany("Inventory")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LinkedObject");
                 });
 
             modelBuilder.Entity("GameShopManager.UserObject", b =>

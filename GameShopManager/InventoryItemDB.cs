@@ -22,7 +22,7 @@ namespace GameShopManager
             List<UserObject.InventoryItem> inventory = dbContext.InventoryItems.Where(i => i.UserID == userID).ToList();
             foreach (UserObject.InventoryItem item in inventory)
             {
-                item.LinkedObject = dbContext.Items.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
+                item.LinkedObject = dbContext.Items.Find(item.ItemID);
             }
             return inventory;
         }
@@ -33,11 +33,14 @@ namespace GameShopManager
         /// <param name="userID">The ID of the user that the item belongs to.</param>
         /// <param name="itemID">The ID of the item to retrieve.</param>
         /// <returns>An InventoryItem object representing the requested inventory item, or null if not found.</returns>
-        public static UserObject.InventoryItem GetInventoryItem(int userID, int itemID)
+        public static UserObject.InventoryItem? GetInventoryItem(int userID, int itemID)
         {
             using GameShopContext dbContext = new GameShopContext();
-            UserObject.InventoryItem inventoryItem = dbContext.InventoryItems.Where(i => i.UserID == userID && i.ItemID == itemID).FirstOrDefault();
-            inventoryItem.LinkedObject = dbContext.Items.Where(i => i.ItemID == inventoryItem.ItemID).FirstOrDefault();
+            UserObject.InventoryItem? inventoryItem = dbContext.InventoryItems.Find(userID, itemID);
+            if (inventoryItem != null)
+            {
+                inventoryItem.LinkedObject = dbContext.Items.Find(itemID);
+            }
             return inventoryItem;
         }
 
