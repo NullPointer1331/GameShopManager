@@ -13,7 +13,7 @@ namespace GameShopManager.Forms
     public partial class DeleteItemForm : Form
     {
         NavigationForm navigationForm;
-        //Optimize loading
+        //Optimize loading by only accessing db once
         List<ItemObject> items;
         public DeleteItemForm()
         {
@@ -25,6 +25,9 @@ namespace GameShopManager.Forms
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Refreshes the list
+        /// </summary>
         private void refreshList()
         {
             item_listbox.Items.Clear();
@@ -34,6 +37,11 @@ namespace GameShopManager.Forms
             }
         }
 
+        /// <summary>
+        /// Check if the listbox has a item selected and toggle the button accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void item_listbox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (item_listbox.SelectedItem != null)
@@ -50,6 +58,7 @@ namespace GameShopManager.Forms
         {
             if (item_listbox.SelectedItem != null)
             {
+                //Confirmation
                 DialogResult result = MessageBox.Show("Do you want to delete this item?", "Confirmation", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
@@ -61,6 +70,7 @@ namespace GameShopManager.Forms
             }
         }
 
+        //Load all items and refresh list
         private void DeleteItemForm_Load(object sender, EventArgs e)
         {
             items = ItemDB.GetAllItems();
