@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,16 @@ namespace GameShopManager
         /// <returns>A list of all the ItemObjects in the database.</returns>
         public static List<ItemObject> GetAllItems()
         {
-            using GameShopContext dbContext = new GameShopContext();
-            List<ItemObject> items = dbContext.Items.ToList();
-            return items;
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                List<ItemObject> items = dbContext.Items.ToList();
+                return items;
+            } catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return new List<ItemObject>(); 
+            }
         }
 
         /// <summary>
@@ -29,9 +37,17 @@ namespace GameShopManager
         /// <returns>The ItemObject with the specified ID, or null if it is not found.</returns>
         public static ItemObject? GetItem(int id)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            ItemObject? item = dbContext.Items.Find(id);
-            return item;
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                ItemObject? item = dbContext.Items.Find(id);
+                return item;
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+                return null;
+            }
         }
 
         /// <summary>
@@ -40,9 +56,15 @@ namespace GameShopManager
         /// <param name="item">The ItemObject to add.</param>
         public static void AddItem(ItemObject item)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            dbContext.Items.Add(item);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                dbContext.Items.Add(item);
+                dbContext.SaveChanges();
+            } catch(Exception ex)
+            {
+                
+            }
         }
 
         /// <summary>
@@ -51,9 +73,17 @@ namespace GameShopManager
         /// <param name="item">The ItemObject to update.</param>
         public static void UpdateItem(ItemObject item)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            dbContext.Items.Update(item);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                dbContext.Items.Update(item);
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
         }
 
         /// <summary>
@@ -62,10 +92,17 @@ namespace GameShopManager
         /// <param name="item">The ItemObject to delete.</param>
         public static void DeleteItem(ItemObject item)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            InventoryItemDB.DeleteAllOfItem(item.ItemID);
-            dbContext.Items.Remove(item);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                InventoryItemDB.DeleteAllOfItem(item.ItemID);
+                dbContext.Items.Remove(item);
+                dbContext.SaveChanges();
+            } catch (Exception ex)
+            {
+
+            }
+            
         }
 
         /// <summary>
@@ -74,13 +111,19 @@ namespace GameShopManager
         /// <param name="id">The ID of the ItemObject to delete.</param>
         public static void DeleteItem(int id)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            ItemObject? item = dbContext.Items.Find(id);
-            if(item != null)
+            try
             {
-                InventoryItemDB.DeleteAllOfItem(item.ItemID);
-                dbContext.Items.Remove(item);
-                dbContext.SaveChanges();
+                using GameShopContext dbContext = new GameShopContext();
+                ItemObject? item = dbContext.Items.Find(id);
+                if (item != null)
+                {
+                    InventoryItemDB.DeleteAllOfItem(item.ItemID);
+                    dbContext.Items.Remove(item);
+                    dbContext.SaveChanges();
+                }
+            } catch (Exception ex)
+            {
+
             }
         }
     }
