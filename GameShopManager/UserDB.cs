@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace GameShopManager
 {
@@ -31,7 +32,7 @@ namespace GameShopManager
             } catch (Exception ex)
             {
                 //Throw empty to keep it running
-                Trace.WriteLine(ex);
+                Trace.WriteLine($"{ex.Message}");
                 return new List<UserObject>();
             }
             
@@ -56,7 +57,7 @@ namespace GameShopManager
                 return user;
             } catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                Trace.WriteLine($"{ex.Message}");
                 return null;
             }
             
@@ -81,7 +82,7 @@ namespace GameShopManager
                 return user;
             } catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                Trace.WriteLine($"{ex.Message}");
                 return null;
             }
         }
@@ -100,9 +101,8 @@ namespace GameShopManager
                 dbContext.SaveChanges();
             } catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                Trace.WriteLine($"{ex.Message}");
             }
-            
         }
 
         /// <summary>
@@ -111,12 +111,18 @@ namespace GameShopManager
         /// <param name="user">The user to update.</param>
         public static void UpdateUser(UserObject user)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            dbContext.Users.Update(user);
-            // It deletes then re-adds the inventory items because it's easier than trying to figure out which ones were added/removed
-            InventoryItemDB.DeleteInventoryItems(user.Inventory);
-            InventoryItemDB.AddInventory(user.Inventory);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                dbContext.Users.Update(user);
+                // It deletes then re-adds the inventory items because it's easier than trying to figure out which ones were added/removed
+                InventoryItemDB.DeleteInventoryItems(user.Inventory);
+                InventoryItemDB.AddInventory(user.Inventory);
+                dbContext.SaveChanges();
+            } catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -133,7 +139,7 @@ namespace GameShopManager
                 dbContext.SaveChanges();
             } catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                Trace.WriteLine($"{ex.Message}");
             }
         }
 
@@ -155,7 +161,7 @@ namespace GameShopManager
                 }
             } catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                Trace.WriteLine($"{ex.Message}");
             }
         }
     }

@@ -25,7 +25,7 @@ namespace GameShopManager
                 return items;
             } catch (Exception ex)
             {
-                Trace.WriteLine(ex);
+                Trace.WriteLine($"{ex.Message}");
                 return new List<ItemObject>(); 
             }
         }
@@ -63,7 +63,7 @@ namespace GameShopManager
                 dbContext.SaveChanges();
             } catch(Exception ex)
             {
-                
+                Trace.WriteLine($"{ex.Message}");
             }
         }
 
@@ -81,7 +81,7 @@ namespace GameShopManager
             }
             catch (Exception ex)
             {
-
+                Trace.WriteLine($"{ex.Message}");
             }
             
         }
@@ -100,7 +100,7 @@ namespace GameShopManager
                 dbContext.SaveChanges();
             } catch (Exception ex)
             {
-
+                Trace.WriteLine($"{ex.Message}");
             }
             
         }
@@ -123,7 +123,7 @@ namespace GameShopManager
                 }
             } catch (Exception ex)
             {
-
+                Trace.WriteLine($"{ex.Message}");
             }
         }
     }
