@@ -33,6 +33,7 @@
             quantityTextBox = new TextBox();
             quantityLabel = new Label();
             AddItemBtn = new Button();
+            cashLabel = new Label();
             SuspendLayout();
             // 
             // itemsListBox
@@ -44,6 +45,7 @@
             itemsListBox.Name = "itemsListBox";
             itemsListBox.Size = new Size(364, 229);
             itemsListBox.TabIndex = 0;
+            itemsListBox.SelectedIndexChanged += itemsListBox_SelectedIndexChanged;
             // 
             // itemLabel
             // 
@@ -80,11 +82,22 @@
             AddItemBtn.UseVisualStyleBackColor = true;
             AddItemBtn.Click += AddItemBtn_Click;
             // 
+            // cashLabel
+            // 
+            cashLabel.AutoSize = true;
+            cashLabel.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            cashLabel.Location = new Point(217, 25);
+            cashLabel.Name = "cashLabel";
+            cashLabel.Size = new Size(62, 28);
+            cashLabel.TabIndex = 5;
+            cashLabel.Text = "Cash: ";
+            // 
             // AddItemForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(525, 308);
+            Controls.Add(cashLabel);
             Controls.Add(AddItemBtn);
             Controls.Add(quantityLabel);
             Controls.Add(quantityTextBox);
@@ -104,5 +117,6 @@
         private TextBox quantityTextBox;
         private Label quantityLabel;
         private Button AddItemBtn;
+        private Label cashLabel;
     }
 }

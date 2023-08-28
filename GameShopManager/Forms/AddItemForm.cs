@@ -31,10 +31,6 @@ namespace GameShopManager.Forms
         private bool ValidInput()
         {
             string errorMessages = "";
-            if (itemsListBox.SelectedIndex == -1)
-            {
-                errorMessages += "Please select an item to add to your inventory.\n";
-            }
             if (quantityTextBox.Text == "")
             {
                 errorMessages += "Please enter a quantity.\n";
@@ -44,6 +40,10 @@ namespace GameShopManager.Forms
                 if (!int.TryParse(quantityTextBox.Text, out int q) || q < 1)
                 {
                     errorMessages += "Please enter a positive number.\n";
+                }
+                else if (navigationForm.ActiveUser.Cash < items[itemsListBox.SelectedIndex].ItemPrice * q)
+                {
+                    errorMessages += $"You don't have enough cash to buy {q} of this item.\n";
                 }
             }
             if (errorMessages != "")
@@ -56,12 +56,13 @@ namespace GameShopManager.Forms
 
         private void AddItemBtn_Click(object sender, EventArgs e)
         {
-            if(ValidInput())
+            if (ValidInput())
             {
                 ItemObject selectedItem = items[itemsListBox.SelectedIndex];
                 int quantity = int.Parse(quantityTextBox.Text);
-                navigationForm.ActiveUser.AddItem(selectedItem, quantity);
-                MessageBox.Show("Item added to inventory.");
+                navigationForm.ActiveUser.BuyItem(selectedItem, quantity);
+                cashLabel.Text = $"Cash: {navigationForm.ActiveUser.Cash}";
+                MessageBox.Show($"{quantity} {selectedItem.ItemName} added to inventory.");
             }
         }
 
@@ -72,6 +73,20 @@ namespace GameShopManager.Forms
             {
                 itemsListBox.Items.Add(item.ToString());
                 items.Add(item);
+            }
+            cashLabel.Text = $"Cash: {navigationForm.ActiveUser.Cash}";
+            AddItemBtn.Enabled = false;
+        }
+
+        private void itemsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (itemsListBox.SelectedIndex == -1)
+            {
+                AddItemBtn.Enabled = false;
+            }
+            else
+            {
+                AddItemBtn.Enabled = true;
             }
         }
     }
