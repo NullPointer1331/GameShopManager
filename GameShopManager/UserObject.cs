@@ -78,15 +78,24 @@ namespace GameShopManager
             if (Cash >= item.ItemPrice * quantity)
             {
                 Cash -= item.ItemPrice * quantity;
+                UserDB.UpdateUser(this);
                 AddItem(item, quantity);
             }
         }
 
-        public void SellItem(InventoryItem item, int quantity)
+        /// <summary>
+        /// Removes items from the user's inventory, 
+        /// and adds the appropriate amount of cash to the user's account
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="quantity"></param>
+        /// <param name="price"></param>
+        public void SellItem(InventoryItem item, int quantity, int price)
         {
             if (item.Quantity >= quantity)
             {
-                Cash += item.LinkedObject.ItemPrice * quantity;
+                Cash += price * quantity;
+                UserDB.UpdateUser(this);
                 RemoveItem(item, quantity);
             }
         }

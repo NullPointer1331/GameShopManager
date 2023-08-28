@@ -43,6 +43,8 @@ namespace GameShopManager.Forms
                     inventoryListBox.Items.Add(ItemObject.LinkedObject.ItemName + " Quantity: " + ItemObject.Quantity);
                 }
             }
+            removeItemsBtn.Enabled = false;
+            cashLabel.Text = $"Cash: {navigationForm.ActiveUser.Cash}";
         }
 
         /// <summary>
@@ -52,10 +54,6 @@ namespace GameShopManager.Forms
         private bool ValidInput()
         {
             string errorMessages = "";
-            if (inventoryListBox.SelectedIndex == -1)
-            {
-                errorMessages += "Please select an item to remove from your inventory.\n";
-            }
             if (quantityTextBox.Text == "")
             {
                 errorMessages += "Please enter a quantity.\n";
@@ -63,6 +61,21 @@ namespace GameShopManager.Forms
             else
             {
                 if (!int.TryParse(quantityTextBox.Text, out int q) || q < 1)
+                {
+                    errorMessages += "Please enter a positive number.\n";
+                }
+                else if (inventory[inventoryListBox.SelectedIndex].Quantity < q)
+                {
+                    errorMessages += $"You don't have {q} of this item.\n";
+                }
+            }
+            if (priceTextBox.Text == "")
+            {
+                errorMessages += "Please enter a price.\n";
+            }
+            else
+            {
+                if (!int.TryParse(priceTextBox.Text, out int p) || p < 1)
                 {
                     errorMessages += "Please enter a positive number.\n";
                 }
@@ -77,11 +90,13 @@ namespace GameShopManager.Forms
 
         private void RemoveItemsBtn_Click(object sender, EventArgs e)
         {
-            if(ValidInput())
+            if (ValidInput())
             {
                 UserObject.InventoryItem item = inventory[inventoryListBox.SelectedIndex];
                 int quantity = int.Parse(quantityTextBox.Text);
-                navigationForm.ActiveUser.RemoveItem(item, quantity);
+                int price = int.Parse(priceTextBox.Text);
+                navigationForm.ActiveUser.SellItem(item, quantity, price);
+                priceTextBox.Text = inventory[inventoryListBox.SelectedIndex].LinkedObject.ItemPrice.ToString();
                 PopulateInventory();
             }
         }
@@ -93,9 +108,22 @@ namespace GameShopManager.Forms
 
         private void SetQuantityMaxBtn_Click(object sender, EventArgs e)
         {
-            if(inventoryListBox.SelectedIndex != -1)
+            if (inventoryListBox.SelectedIndex != -1)
             {
                 quantityTextBox.Text = inventory[inventoryListBox.SelectedIndex].Quantity.ToString();
+            }
+        }
+
+        private void inventoryListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (inventoryListBox.SelectedIndex == -1)
+            {
+                removeItemsBtn.Enabled = false;
+            }
+            else
+            {
+                removeItemsBtn.Enabled = true;
+                priceTextBox.Text = inventory[inventoryListBox.SelectedIndex].LinkedObject.ItemPrice.ToString();
             }
         }
     }

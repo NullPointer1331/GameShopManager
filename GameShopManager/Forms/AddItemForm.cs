@@ -75,6 +75,7 @@ namespace GameShopManager.Forms
                 items.Add(item);
             }
             cashLabel.Text = $"Cash: {navigationForm.ActiveUser.Cash}";
+            AddItemBtn.Enabled = false;
         }
 
         private void itemsListBox_SelectedIndexChanged(object sender, EventArgs e)
