@@ -95,9 +95,15 @@ namespace GameShopManager.Forms
                 UserObject.InventoryItem item = inventory[inventoryListBox.SelectedIndex];
                 int quantity = int.Parse(quantityTextBox.Text);
                 int price = int.Parse(priceTextBox.Text);
-                navigationForm.ActiveUser.SellItem(item, quantity, price);
-                priceTextBox.Text = inventory[inventoryListBox.SelectedIndex].LinkedObject.ItemPrice.ToString();
-                PopulateInventory();
+                DialogResult result = 
+                    MessageBox.Show($"Are you sure you want to sell {quantity} {item.LinkedObject.ItemName} for {price * quantity} cash"
+                    , "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    navigationForm.ActiveUser.SellItem(item, quantity, price);
+                    priceTextBox.Text = item.LinkedObject.ItemPrice.ToString();
+                    PopulateInventory();
+                }
             }
         }
 

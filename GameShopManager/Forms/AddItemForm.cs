@@ -62,7 +62,7 @@ namespace GameShopManager.Forms
                 int quantity = int.Parse(quantityTextBox.Text);
                 navigationForm.ActiveUser.BuyItem(selectedItem, quantity);
                 cashLabel.Text = $"Cash: {navigationForm.ActiveUser.Cash}";
-                MessageBox.Show("Item added to inventory.");
+                MessageBox.Show($"{quantity} {selectedItem.ItemName} added to inventory.");
             }
         }
 
