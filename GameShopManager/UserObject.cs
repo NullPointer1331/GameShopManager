@@ -42,7 +42,7 @@ namespace GameShopManager
         public List<InventoryItem>? Inventory { get; set; }
 
         /// <summary>
-        /// Creates a new user with a username and password, and sets cash to 0
+        /// Creates a new user with a username and password, and sets cash to 1000
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
@@ -50,7 +50,7 @@ namespace GameShopManager
         {
             UserName = userName;
             Password = password;
-            Cash = 0;
+            Cash = 1000;
             Inventory = new List<InventoryItem>();
         }
 
@@ -66,6 +66,29 @@ namespace GameShopManager
             Password = password;
             Cash = cash;
             Inventory = new List<InventoryItem>();
+        }
+
+        /// <summary>
+        /// If the user has enough cash, it will buy an item and add it to the user's inventory
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="quantity"></param>
+        public void BuyItem(ItemObject item, int quantity)
+        {
+            if (Cash >= item.ItemPrice * quantity)
+            {
+                Cash -= item.ItemPrice * quantity;
+                AddItem(item, quantity);
+            }
+        }
+
+        public void SellItem(InventoryItem item, int quantity)
+        {
+            if (item.Quantity >= quantity)
+            {
+                Cash += item.LinkedObject.ItemPrice * quantity;
+                RemoveItem(item, quantity);
+            }
         }
 
         /// <summary>
