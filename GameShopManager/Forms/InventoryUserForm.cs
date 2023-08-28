@@ -62,7 +62,7 @@ namespace GameShopManager.Forms
             {
                 if (!int.TryParse(quantityTextBox.Text, out int q) || q < 1)
                 {
-                    errorMessages += "Please enter a positive number.\n";
+                    errorMessages += "Please enter a positive number for quantity.\n";
                 }
                 else if (inventory[inventoryListBox.SelectedIndex].Quantity < q)
                 {
@@ -77,7 +77,7 @@ namespace GameShopManager.Forms
             {
                 if (!int.TryParse(priceTextBox.Text, out int p) || p < 1)
                 {
-                    errorMessages += "Please enter a positive number.\n";
+                    errorMessages += "Please enter a positive number for price.\n";
                 }
             }
             if (errorMessages != "")
@@ -101,7 +101,6 @@ namespace GameShopManager.Forms
                 if (result == DialogResult.Yes)
                 {
                     navigationForm.ActiveUser.SellItem(item, quantity, price);
-                    priceTextBox.Text = item.LinkedObject.ItemPrice.ToString();
                     PopulateInventory();
                 }
             }
