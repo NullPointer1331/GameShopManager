@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,21 @@ namespace GameShopManager
         /// <returns>A list of InventoryItem objects representing the user's inventory.</returns>
         public static List<UserObject.InventoryItem> GetUserInventory(int userID)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            List<UserObject.InventoryItem> inventory = dbContext.InventoryItems.Where(i => i.UserID == userID).ToList();
-            foreach (UserObject.InventoryItem item in inventory)
+            try
             {
-                item.LinkedObject = dbContext.Items.Find(item.ItemID);
+                using GameShopContext dbContext = new GameShopContext();
+                List<UserObject.InventoryItem> inventory = dbContext.InventoryItems.Where(i => i.UserID == userID).ToList();
+                foreach (UserObject.InventoryItem item in inventory)
+                {
+                    item.LinkedObject = dbContext.Items.Find(item.ItemID);
+                }
+                return inventory;
             }
-            return inventory;
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+                return new List<UserObject.InventoryItem>();
+            }
         }
 
         /// <summary>
@@ -35,13 +44,21 @@ namespace GameShopManager
         /// <returns>An InventoryItem object representing the requested inventory item, or null if not found.</returns>
         public static UserObject.InventoryItem? GetInventoryItem(int userID, int itemID)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            UserObject.InventoryItem? inventoryItem = dbContext.InventoryItems.Find(userID, itemID);
-            if (inventoryItem != null)
+            try
             {
-                inventoryItem.LinkedObject = dbContext.Items.Find(itemID);
+                using GameShopContext dbContext = new GameShopContext();
+                UserObject.InventoryItem? inventoryItem = dbContext.InventoryItems.Find(userID, itemID);
+                if (inventoryItem != null)
+                {
+                    inventoryItem.LinkedObject = dbContext.Items.Find(itemID);
+                }
+                return inventoryItem;
             }
-            return inventoryItem;
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+                return null;
+            }
         }
 
         /// <summary>
@@ -50,12 +67,19 @@ namespace GameShopManager
         /// <param name="inventory">A list of InventoryItem objects to add to the database.</param>
         public static void AddInventory(List<UserObject.InventoryItem> inventory)
         {
-            if (inventory != null)
+            try
             {
-                foreach (UserObject.InventoryItem item in inventory)
+                if (inventory != null)
                 {
-                    AddInventoryItem(item);
+                    foreach (UserObject.InventoryItem item in inventory)
+                    {
+                        AddInventoryItem(item);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
             }
         }
 
@@ -65,9 +89,16 @@ namespace GameShopManager
         /// <param name="item">The InventoryItem object to add to the database.</param>
         public static void AddInventoryItem(UserObject.InventoryItem item)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            dbContext.InventoryItems.Add(item);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                dbContext.InventoryItems.Add(item);
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -76,9 +107,16 @@ namespace GameShopManager
         /// <param name="item"></param>
         public static void UpdateInventoryItem(UserObject.InventoryItem item)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            dbContext.InventoryItems.Update(item);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                dbContext.InventoryItems.Update(item);
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -87,12 +125,19 @@ namespace GameShopManager
         /// <param name="inventory">A list of InventoryItem objects to delete from the database.</param>
         public static void DeleteInventoryItems(List<UserObject.InventoryItem> inventory)
         {
-            if (inventory != null)
+            try
             {
-                foreach (UserObject.InventoryItem item in inventory)
+                if (inventory != null)
                 {
-                    DeleteInventoryItem(item);
+                    foreach (UserObject.InventoryItem item in inventory)
+                    {
+                        DeleteInventoryItem(item);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
             }
         }
 
@@ -102,9 +147,16 @@ namespace GameShopManager
         /// <param name="itemID"></param>
         public static void DeleteAllOfItem(int itemID)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            List<UserObject.InventoryItem> inventory = dbContext.InventoryItems.Where(i => i.ItemID == itemID).ToList();
-            DeleteInventoryItems(inventory);
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                List<UserObject.InventoryItem> inventory = dbContext.InventoryItems.Where(i => i.ItemID == itemID).ToList();
+                DeleteInventoryItems(inventory);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -113,9 +165,16 @@ namespace GameShopManager
         /// <param name="item">The InventoryItem object to delete from the database.</param>
         public static void DeleteInventoryItem(UserObject.InventoryItem item)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            dbContext.InventoryItems.Remove(item);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                dbContext.InventoryItems.Remove(item);
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+            }
         }
     }
 }
