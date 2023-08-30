@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Logging;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace GameShopManager
 {
@@ -17,13 +20,22 @@ namespace GameShopManager
         /// <returns>A list of UserObject containing all the users in the database.</returns>
         public static List<UserObject> GetAllUsers()
         {
-            using GameShopContext dbContext = new GameShopContext();
-            List<UserObject> users = dbContext.Users.ToList();
-            foreach (UserObject user in users)
+            try
             {
-                user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
+                using GameShopContext dbContext = new GameShopContext();
+                List<UserObject> users = dbContext.Users.ToList();
+                foreach (UserObject user in users)
+                {
+                    user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
+                }
+                return users;
+            } catch (Exception ex)
+            {
+                //Throw empty to keep it running
+                Trace.WriteLine($"{ex.Message}");
+                return new List<UserObject>();
             }
-            return users;
+            
         }
 
         /// <summary>
@@ -33,13 +45,22 @@ namespace GameShopManager
         /// <returns>A UserObject containing the user with the given ID, or null if not found.</returns>
         public static UserObject? GetUser(int id)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            UserObject? user = dbContext.Users.Find(id);
-            if (user != null)
+            //Catch sql errors such as auth fail
+            try
             {
-                user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
+                using GameShopContext dbContext = new GameShopContext();
+                UserObject? user = dbContext.Users.Find(id);
+                if (user != null)
+                {
+                    user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
+                }
+                return user;
+            } catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+                return null;
             }
-            return user;
+            
         }
 
         /// <summary>
@@ -50,13 +71,20 @@ namespace GameShopManager
         /// <returns></returns>
         public static UserObject? GetUser(string userName, string password)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            UserObject? user = dbContext.Users.Where(u => u.UserName == userName && u.Password == password).FirstOrDefault();
-            if (user != null)
+            try
             {
-                user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
+                using GameShopContext dbContext = new GameShopContext();
+                UserObject? user = dbContext.Users.Where(u => u.UserName == userName && u.Password == password).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Inventory = InventoryItemDB.GetUserInventory(user.UserID);
+                }
+                return user;
+            } catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+                return null;
             }
-            return user;
         }
 
         /// <summary>
@@ -65,10 +93,16 @@ namespace GameShopManager
         /// <param name="user">The user to add to the database.</param>
         public static void AddUser(UserObject user)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            dbContext.Users.Add(user);
-            InventoryItemDB.AddInventory(user.Inventory);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                dbContext.Users.Add(user);
+                InventoryItemDB.AddInventory(user.Inventory);
+                dbContext.SaveChanges();
+            } catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -77,12 +111,18 @@ namespace GameShopManager
         /// <param name="user">The user to update.</param>
         public static void UpdateUser(UserObject user)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            dbContext.Users.Update(user);
-            // It deletes then re-adds the inventory items because it's easier than trying to figure out which ones were added/removed
-            InventoryItemDB.DeleteInventoryItems(user.Inventory);
-            InventoryItemDB.AddInventory(user.Inventory);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                dbContext.Users.Update(user);
+                // It deletes then re-adds the inventory items because it's easier than trying to figure out which ones were added/removed
+                InventoryItemDB.DeleteInventoryItems(user.Inventory);
+                InventoryItemDB.AddInventory(user.Inventory);
+                dbContext.SaveChanges();
+            } catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -91,10 +131,16 @@ namespace GameShopManager
         /// <param name="user">The user to delete from the database.</param>
         public static void DeleteUser(UserObject user)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            InventoryItemDB.DeleteInventoryItems(user.Inventory);
-            dbContext.Users.Remove(user);
-            dbContext.SaveChanges();
+            try
+            {
+                using GameShopContext dbContext = new GameShopContext();
+                InventoryItemDB.DeleteInventoryItems(user.Inventory);
+                dbContext.Users.Remove(user);
+                dbContext.SaveChanges();
+            } catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -103,13 +149,19 @@ namespace GameShopManager
         /// <param name="id">The ID of the user to delete from the database.</param>
         public static void DeleteUser(int id)
         {
-            using GameShopContext dbContext = new GameShopContext();
-            UserObject? user = dbContext.Users.Find(id);
-            if(user != null)
+            try
             {
-                InventoryItemDB.DeleteInventoryItems(user.Inventory);
-                dbContext.Users.Remove(user);
-                dbContext.SaveChanges();
+                using GameShopContext dbContext = new GameShopContext();
+                UserObject? user = dbContext.Users.Find(id);
+                if (user != null)
+                {
+                    InventoryItemDB.DeleteInventoryItems(user.Inventory);
+                    dbContext.Users.Remove(user);
+                    dbContext.SaveChanges();
+                }
+            } catch (Exception ex)
+            {
+                Trace.WriteLine($"{ex.Message}");
             }
         }
     }
