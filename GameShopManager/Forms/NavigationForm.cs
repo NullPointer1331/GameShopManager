@@ -73,12 +73,6 @@ namespace GameShopManager.Forms
             form.Show();
         }
 
-        private void CreateUser_Click(object sender, EventArgs e)
-        {
-            RegistrationUserForm form = new RegistrationUserForm(this);
-            form.Show();
-        }
-
         private void DeleteUser_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to do this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
