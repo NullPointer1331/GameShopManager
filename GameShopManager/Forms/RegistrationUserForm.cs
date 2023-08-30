@@ -70,5 +70,12 @@ namespace GameShopManager.Forms
                 return true;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoginUserForm loginUserForm = new LoginUserForm();
+            loginUserForm.Show();
+            this.Close();
+        }
     }
 }
