@@ -63,6 +63,13 @@ namespace GameShopManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap backpack {
+            get {
+                object obj = ResourceManager.GetObject("backpack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap BackgroundLogin {
             get {
                 object obj = ResourceManager.GetObject("BackgroundLogin", resourceCulture);
@@ -73,6 +80,13 @@ namespace GameShopManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap shoppinhCart {
+            get {
+                object obj = ResourceManager.GetObject("shoppinhCart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         internal static System.Drawing.Bitmap backgroundTransparency {
             get {
                 object obj = ResourceManager.GetObject("backgroundTransparency", resourceCulture);
